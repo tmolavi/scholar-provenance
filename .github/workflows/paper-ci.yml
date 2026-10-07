@@ -1,0 +1,94 @@
+name: Paper CI & Publication Pipeline
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - 'v*'
+      - 'paper-*'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate-and-build:
+    name: Audit & Build Paper
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: read
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install System Dependencies (Pango, Noto Fonts)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0 fonts-vazirmatn fonts-noto-core
+
+      - name: Install ScholarProvenance CLI
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Validate Research Manifest
+        if: hashFiles('research-project.yml', 'research-project.yaml') != ''
+        run: |
+          scholar-provenance validate-manifest research-project.yml || scholar-provenance validate-manifest research-project.yaml
+
+      - name: Privacy & Sensitive Secret Scan
+        run: |
+          scholar-provenance scan-sensitive .
+
+      - name: Audit Evidence Ledger
+        if: hashFiles('research/evidence-matrix.json') != ''
+        run: |
+          scholar-provenance ledger research/evidence-matrix.json --markdown research/evidence-matrix.md
+
+      - name: Audit Manuscript Claims & Citations
+        if: hashFiles('paper/manuscript.md') != ''
+        run: |
+          scholar-provenance audit paper/manuscript.md --bib paper/references.bib --matrix research/evidence-matrix.json --output validation/claim-citation-audit.md
+
+      - name: Evaluate 12 Quality Gates
+        if: hashFiles('research-project.yml', 'research-project.yaml') != ''
+        run: |
+          scholar-provenance check-gates .
+
+      - name: Build Multi-Format Publication (HTML, PDF, DOCX)
+        if: hashFiles('paper/manuscript.md') != ''
+        run: |
+          scholar-provenance build paper/manuscript.md
+
+      - name: Generate arXiv, Overleaf & Zenodo Bundles
+        if: hashFiles('paper/manuscript.md') != ''
+        run: |
+          scholar-provenance publish --target arxiv,overleaf,metadata
+
+      - name: Upload Paper Artifacts
+        if: hashFiles('paper/manuscript.pdf') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-paper-publication
+          path: |
+            paper/*.pdf
+            paper/*.html
+            paper/*.docx
+            paper/arxiv_submission.tar.gz
+            paper/overleaf_bundle.zip
+            paper/RELEASE_NOTES.md
+            .zenodo.json
+          retention-days: 30
+
+      - name: Autonomous GitHub Release (Tags Only)
+        if: startsWith(github.ref, 'refs/tags/') && hashFiles('paper/manuscript.md') != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          scholar-provenance publish --target github --tag ${{ github.ref_name }}

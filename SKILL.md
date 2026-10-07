@@ -66,7 +66,7 @@ Stage 14: Adversarial Peer Review & Red-Team Attack
        ↓
 Stage 15: Privacy & Sensitive Material Scrubbing
        ↓
-Stage 16: Reproducibility & Publication Packaging
+Stage 16: Reproducibility, Publication Packaging & Autonomous Distribution
 ```
 
 ---
@@ -216,6 +216,15 @@ scholar-provenance check-gates
 # Scan project for private keys, tokens, and PII
 scholar-provenance scan-sensitive .
 
+# Build multi-format manuscripts (HTML, PDF via WeasyPrint, DOCX)
+scholar-provenance build paper/manuscript.md
+
+# Proactive publication recommendations (Preprints, Venues, Next Steps)
+scholar-provenance publish --recommend
+
+# Autonomous release connector & bundler (arXiv, Overleaf, Zenodo, GitHub Release)
+scholar-provenance publish --target all
+
 # Generate the complete reproducibility package
 scholar-provenance package --output dist/
 ```
@@ -225,7 +234,30 @@ scholar-provenance package --output dist/
 ## 8. Failure Behaviors & Abort Conditions
 
 The agent must immediately halt the drafting workflow and alert the user if:
-1. **Critical Citation Failure:** A requested core claim relies on a paper that cannot be found on OpenAlex, Crossref, or arXiv. *Action: Do not invent the citation. Inform user and ask for primary source.*
+1. **Critical Citation Failure:** A requested core claim relies on a paper that cannot be found on OpenAlex, Crossref, Semantic Scholar, or arXiv. *Action: Do not invent the citation. Inform user and ask for primary source.*
 2. **Missing Empirical Evidence:** User asks to write a benchmark paper without raw benchmark measurements or replication scripts. *Action: Decline benchmark paper; recommend technical report or case study instead.*
 3. **Invalidated Novelty:** Literature search reveals that the proposed architecture or method was already published in identical form. *Action: Alert user immediately and reframe paper as replication, independent evaluation, or comparative implementation.*
 4. **Sensitive Data Detection:** A dataset or log contains unmasked API keys, server IP addresses, or private corporate identifiers. *Action: Halt packaging and request user redaction.*
+
+---
+
+## 9. Proactive Publication Advisory & Autonomous Release Agent (Codex-Style Auto-Publish)
+
+Upon completion of the 16 stages (or once all 12 quality gates evaluate to `READY`), the agent must **never stop passively at file generation**. It must act as an autonomous publishing partner:
+
+### 9.1. Proactive End-of-Run Publication Recommendations
+At the conclusion of the research run, the agent must present:
+1. **Target Preprints & Repositories**: Specific recommendations for immediate open dissemination (e.g. arXiv categories `cs.AI` / `cs.SE`, Zenodo for citable DOI, OSF).
+2. **Target Peer-Review Venues**: Specific matching journals or conferences (e.g. NeurIPS Datasets Track, IEEE Software, ACM TOSEM) with review cycles.
+3. **Immediate Autonomous Publishing Offer**: Offer to autonomously package, write metadata, and publish the release.
+
+### 9.2. Autonomous Connection & Release Execution ("Codex-Style")
+When the user approves or requests publishing, the agent or CLI autonomously executes the complete release workflow:
+1. **Synthesizes Complete Metadata**: Formulates a formal title, clean abstract (unencumbered by markdown citations), author metadata, keywords, and a complete BibTeX citation block for the paper.
+2. **Drafts Rich Release Notes (`paper/RELEASE_NOTES.md`)**: Automatically generates publication notes including key empirical findings, an auditable cryptographic SHA-256 table of all artifacts, and an ethical COPE-compliant AI disclosure statement.
+3. **Prepares Submission Bundles**:
+   - `paper/arxiv_submission.tar.gz`: Self-contained, sanitized LaTeX package ready for arXiv drag-and-drop.
+   - `paper/overleaf_bundle.zip`: Formatted archive for one-click Overleaf import.
+   - `.zenodo.json`: Machine-readable metadata for CERN Zenodo permanent archival and DOI minting.
+4. **Publishes Live GitHub Release**: Uses `scholar-provenance publish --target github` (or `gh release create`) to tag the commit, publish the release notes, and attach the compiled PDF and distribution bundles.
+

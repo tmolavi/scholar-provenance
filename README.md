@@ -161,6 +161,12 @@ scholar-provenance scan-sensitive .
 # Verify the 12 Quality Gates
 scholar-provenance check-gates .
 
+# Get proactive publication recommendations (Preprints, Venues, Next Steps)
+scholar-provenance publish --recommend
+
+# Autonomous release connector (arXiv tarball, Overleaf zip, Zenodo DOI metadata, GitHub Release)
+scholar-provenance publish --target all
+
 # Submit to voluntary community showcase
 scholar-provenance showcase
 ```
@@ -224,7 +230,7 @@ If you use ScholarProvenance in your research, please cite it using the metadata
   title        = {{ScholarProvenance: Academic Evidence, Literature Verification \& Paper Generation Skill}},
   year         = {2026},
   publisher    = {GitHub},
-  version      = {0.1.0},
+  version      = {0.2.0},
   url          = {https://github.com/tmolavi/scholar-provenance}
 }
 ```

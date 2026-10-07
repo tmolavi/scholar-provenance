@@ -142,7 +142,7 @@ Taghi Molavi bu açık kaynak aracın ve araştırma metodolojisinin geliştiric
   title        = {{ScholarProvenance: Academic Evidence, Literature Verification \& Paper Generation Skill}},
   year         = {2026},
   publisher    = {GitHub},
-  version      = {0.1.0},
+  version      = {0.2.0},
   url          = {https://github.com/tmolavi/scholar-provenance}
 }
 ```

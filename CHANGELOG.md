@@ -5,6 +5,15 @@ All notable changes to **ScholarProvenance** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-10-07
+
+### Added
+- **Autonomous Release Connector & Publisher:** Codex-style autonomous publishing engine (`scholar_provenance/publisher.py`) with `scholar-provenance publish`.
+- **Automated Distribution Bundling:** Automatic creation of arXiv submission packages (`arxiv_submission.tar.gz`), Overleaf ZIP archives (`overleaf_bundle.zip`), and CERN Zenodo permanent archival metadata (`.zenodo.json`).
+- **Proactive Venue & Archive Advisory:** Proactive recommendations for target preprints (arXiv, Zenodo, OSF) and premier peer-review venues (NeurIPS, IEEE Software, ACM TOSEM) with review cycles via `scholar-provenance publish --recommend`.
+- **Live Scholarly Graph Integration:** Semantic Scholar Academic Graph API search and live Crossref DOI verification added to `scholar_provenance/search.py`.
+- **GitHub Action Paper CI Workflow:** Automated continuous integration (`.github/workflows/paper-ci.yml`) for validating manifests, checking 12 quality gates, compiling PDF/HTML, and publishing tagged releases autonomously.
+
 ## [0.1.0] - 2026-10-07
 
 ### Added

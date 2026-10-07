@@ -21,6 +21,7 @@ from scholar_provenance.gates import evaluate_project_gates, generate_confidence
 from scholar_provenance.reproducibility import generate_reproducibility_package
 from scholar_provenance.visuals import generate_bar_chart_svg, generate_architecture_diagram_svg, VisualAsset, VisualManifestManager
 from scholar_provenance.generator import render_full_html_document, render_pdf_from_html, render_docx_manuscript
+from scholar_provenance.publisher import get_publication_recommendations, publish_release
 
 
 def cmd_init(args: argparse.Namespace) -> int:
@@ -416,6 +417,64 @@ def cmd_showcase(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_publish(args: argparse.Namespace) -> int:
+    """Execute autonomous publication, distribution bundling, or venue recommendation."""
+    target_dir = Path(args.path or ".").resolve()
+
+    if args.recommend:
+        rec = get_publication_recommendations(target_dir)
+        print("=" * 70)
+        print("🎯 ScholarProvenance: Autonomous Publication & Venue Advisory")
+        print("=" * 70)
+        print(f"Title:         {rec['title']}")
+        print(f"Authors:       {', '.join(rec['authors'])}")
+        print(f"Research Type: {rec['research_type'].capitalize()}\n")
+
+        print("📦 Recommended Open Science Preprints & Registries:")
+        for a in rec["recommended_archives"]:
+            print(f"  • {a['name']} ({a['category']}) - {a['suitability']}")
+
+        print("\n🏛️ Recommended Peer-Review Venues:")
+        for v in rec["recommended_venues"]:
+            print(f"  • {v['venue']} [{v['type']}] ({v['cycle']})")
+
+        print("\n🚀 Next Autonomous Actions:")
+        for act in rec["next_autonomous_actions"]:
+            print(f"  • {act}")
+        return 0
+
+    print(f"🚀 Executing publication pipeline for '{target_dir.name}' (Target: {args.target})...")
+    res = publish_release(
+        project_dir=target_dir,
+        target=args.target,
+        tag=args.tag,
+        dry_run=args.dry_run,
+    )
+
+    print("\n✅ Publication Assets Generated:")
+    print(f"   • Release Notes: {res['release_notes_file']}")
+    print(f"   • Zenodo Metadata: {res['zenodo_file']}")
+    for art in res.get("artifacts_created", []):
+        print(f"   • Bundle: {art}")
+
+    gh_res = res.get("github_release", {})
+    if gh_res:
+        action = gh_res.get("action")
+        if action == "created":
+            print(f"\n🎉 GitHub Release successfully published live: {gh_res.get('url')}")
+        elif action == "dry_run_simulated":
+            print(f"\n🔍 [Dry-Run] GitHub Release simulated for tag '{gh_res.get('tag')}'.")
+            print(f"   Assets to attach: {', '.join(gh_res.get('assets', []))}")
+        elif action == "failed":
+            print(f"\n⚠️ GitHub Release creation returned error: {gh_res.get('error')}", file=sys.stderr)
+            print(f"   {gh_res.get('fallback')}")
+        elif action == "skipped_no_gh_cli":
+            print(f"\n💡 {gh_res.get('fallback')}")
+
+    print("\nNext step: Submit arXiv bundle (`paper/arxiv_submission.tar.gz`) or import `paper/overleaf_bundle.zip` into Overleaf.")
+    return 0
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     parser = argparse.ArgumentParser(
         prog="scholar-provenance",
@@ -499,6 +558,19 @@ def main(argv: Optional[List[str]] = None) -> int:
     p_shw = subparsers.add_parser("showcase", help="Prepare voluntary showcase submission")
     p_shw.add_argument("--yes", action="store_true", help="Non-interactive default submission")
 
+    # publish
+    p_pub = subparsers.add_parser("publish", help="Autonomous release connector, bundler, and venue advisory")
+    p_pub.add_argument("path", nargs="?", default=".", help="Project workspace root")
+    p_pub.add_argument(
+        "--target",
+        choices=["all", "github", "arxiv", "overleaf", "metadata"],
+        default="all",
+        help="Target distribution system (default: all)",
+    )
+    p_pub.add_argument("--tag", help="Explicit release tag (e.g. v0.1.0 or paper-v1)")
+    p_pub.add_argument("--dry-run", action="store_true", help="Simulate release generation without pushing to remotes")
+    p_pub.add_argument("--recommend", action="store_true", help="Display proactive venue & archive recommendations")
+
     args = parser.parse_args(argv)
     if not args.command:
         parser.print_help()
@@ -517,6 +589,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "build": cmd_build,
         "chart": cmd_chart,
         "showcase": cmd_showcase,
+        "publish": cmd_publish,
     }
 
     return commands[args.command](args)

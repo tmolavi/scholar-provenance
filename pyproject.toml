@@ -4,8 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "scholar-provenance"
-version = "0.1.0"
+version = "0.2.0"
 description = "Turn empirical repositories, datasets, and technical documentation into verifiable academic research papers with strict evidence ledgers and zero citation fabrication."
+
 readme = "README.md"
 authors = [
     { name = "Taghi Molavi", email = "info@molavi.pro" }
@@ -42,3 +43,7 @@ scholar-provenance = "scholar_provenance.cli:main"
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["scholar_provenance*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

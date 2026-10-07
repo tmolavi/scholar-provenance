@@ -167,13 +167,90 @@ def search_arxiv(query: str, limit: int = 5, timeout: int = 8) -> List[Scholarly
     return works
 
 
+def search_semanticscholar(query: str, limit: int = 5, timeout: int = 8) -> List[ScholarlyWork]:
+    """Search Semantic Scholar academic graph API."""
+    encoded_query = urllib.parse.quote(query)
+    fields = "title,authors,year,venue,externalIds,openAccessPdf"
+    url = f"https://api.semanticscholar.org/graph/v1/paper/search?query={encoded_query}&limit={limit}&fields={fields}"
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+
+    works: List[ScholarlyWork] = []
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as response:
+            data = json.loads(response.read().decode("utf-8"))
+            for item in data.get("data", []):
+                authors = [a.get("name", "") for a in item.get("authors", []) if a.get("name")]
+                ext_ids = item.get("externalIds") or {}
+                doi = ext_ids.get("DOI")
+                doi_url = f"https://doi.{doi}" if doi else None
+
+                work = ScholarlyWork(
+                    title=item.get("title") or "Untitled",
+                    authors=authors,
+                    publication_year=item.get("year"),
+                    doi=doi_url,
+                    url=doi_url or f"https://www.semanticscholar.org/paper/{item.get('paperId')}",
+                    venue=item.get("venue"),
+                    source_index="SemanticScholar",
+                    is_open_access=bool(item.get("openAccessPdf")),
+                    snippet=None,
+                )
+                works.append(work)
+    except Exception:
+        pass
+    return works
+
+
+def verify_doi_live(doi: str, timeout: int = 8) -> Optional[ScholarlyWork]:
+    """Verify DOI existence against Crossref live metadata API."""
+    clean_doi = doi.strip()
+    if clean_doi.startswith("http"):
+        clean_doi = clean_doi.split("doi.org/")[-1]
+
+    encoded_doi = urllib.parse.quote(clean_doi)
+    url = f"https://api.crossref.org/works/{encoded_doi}"
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as response:
+            data = json.loads(response.read().decode("utf-8"))
+            item = data.get("message", {})
+            authors = []
+            for a in item.get("author", []):
+                name_parts = filter(None, [a.get("given"), a.get("family")])
+                authors.append(" ".join(name_parts) or a.get("name", ""))
+
+            title_list = item.get("title", [])
+            title = title_list[0] if title_list else "Untitled"
+
+            issued = item.get("issued", {}).get("date-parts", [[]])[0]
+            year = issued[0] if issued else None
+            container = item.get("container-title", [])
+            venue = container[0] if container else None
+
+            return ScholarlyWork(
+                title=title,
+                authors=authors,
+                publication_year=year,
+                doi=f"https://doi.org/{clean_doi}",
+                url=item.get("URL") or f"https://doi.org/{clean_doi}",
+                venue=venue,
+                source_index="CrossrefLive",
+                is_open_access=True,
+                snippet=None,
+            )
+    except Exception:
+        return None
+
+
 def unified_literature_search(
     query: str, limit_per_source: int = 3, min_year: Optional[int] = None
 ) -> List[ScholarlyWork]:
-    """Execute search across OpenAlex, Crossref, and arXiv, deduplicating results."""
+    """Execute search across OpenAlex, Crossref, Semantic Scholar, and arXiv, deduplicating results."""
     combined: List[ScholarlyWork] = []
     combined.extend(search_openalex(query, limit=limit_per_source))
     combined.extend(search_crossref(query, limit=limit_per_source))
+    combined.extend(search_semanticscholar(query, limit=limit_per_source))
     combined.extend(search_arxiv(query, limit=limit_per_source))
 
     # Deduplicate by normalized title
@@ -189,3 +266,4 @@ def unified_literature_search(
         deduped.append(item)
 
     return deduped
+
