@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-10-07T10:00:00Z",
+  "assets": [
+    {
+      "asset_id": "fig-01-ieab-architecture",
+      "type": "architecture_diagram",
+      "title": "Iranian Enterprise AI Bridge: Three-Tier Mediator Architecture",
+      "file_path": "paper/assets/figure-1.svg",
+      "source": "Open-Source Iranian Enterprise AI Bridge Repository",
+      "source_data": "https://github.com/tmolavi/iranian-enterprise-ai-bridge",
+      "generated_by": "ScholarProvenance Pure-SVG Engine",
+      "license": "CC-BY-4.0",
+      "citation": "molavi2026ieab",
+      "creation_date": "2026-10-07T10:00:00Z",
+      "language": "en",
+      "alt_text": "Architectural block diagram showing three layers: Enterprise ERP Databases, Mediator Connector Gateway, and Downstream LLM Agents."
+    }
+  ]
+}

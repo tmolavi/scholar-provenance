@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scholar-provenance"
+version = "0.1.0"
+description = "Turn empirical repositories, datasets, and technical documentation into verifiable academic research papers with strict evidence ledgers and zero citation fabrication."
+readme = "README.md"
+authors = [
+    { name = "Taghi Molavi", email = "info@molavi.pro" }
+]
+license = { text = "MIT" }
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering",
+]
+requires-python = ">=3.10"
+dependencies = [
+    "jsonschema>=4.0.0",
+    "pyyaml>=6.0",
+    "python-docx>=1.0.0",
+    "weasyprint>=60.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+]
+
+[project.scripts]
+scholar-provenance = "scholar_provenance.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["scholar_provenance*"]

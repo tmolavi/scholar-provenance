@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "scholar-provenance": {
+      "command": "python3",
+      "args": ["-m", "scholar_provenance.mcp_server"],
+      "env": {
+        "PYTHONPATH": "."
+      }
+    }
+  }
+}

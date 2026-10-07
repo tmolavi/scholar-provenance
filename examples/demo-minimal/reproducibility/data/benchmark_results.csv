@@ -1,0 +1,7 @@
+trial_id,configuration,concurrency,latency_ms,memory_mb,throughput_qps
+1,Baseline_Unvalidated,1,245.2,128.4,4.08
+2,Baseline_Unvalidated,10,312.8,142.0,31.97
+3,Baseline_Unvalidated,50,680.1,198.5,73.52
+4,Mediated_Ledger,1,48.5,92.1,20.62
+5,Mediated_Ledger,10,62.3,105.4,160.51
+6,Mediated_Ledger,50,145.8,134.2,342.94

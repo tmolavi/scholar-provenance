@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-10-07T10:00:00Z",
+  "assets": [
+    {
+      "asset_id": "fig-01-latency-comparison",
+      "type": "bar_chart",
+      "title": "Latency Comparison Across Concurrency Levels (ms)",
+      "file_path": "paper/assets/figure-1.svg",
+      "source": "Local Benchmark Evaluation Trials",
+      "source_data": "inputs/benchmark_results.csv",
+      "generated_by": "ScholarProvenance Pure-SVG Engine",
+      "license": "CC-BY-4.0",
+      "citation": "benchmark_trial_csv",
+      "creation_date": "2026-10-07T10:00:00Z",
+      "language": "en",
+      "alt_text": "Grouped bar chart comparing baseline latency versus mediated ledger latency across 1, 10, and 50 concurrency levels."
+    }
+  ]
+}

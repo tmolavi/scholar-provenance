@@ -1,0 +1,87 @@
+{
+  "version": "1.0.0",
+  "project_title": "From ERP Data to AI-Ready Enterprise Intelligence: An Open Architecture for Connecting Legacy ERP Systems to Large Language Models",
+  "generated_at": "2026-10-07T10:00:00Z",
+  "last_updated": "2026-10-07T10:00:00Z",
+  "provenance_policy": {
+    "strict_zero_fabrication": true,
+    "minimum_verification_for_factual_claims": "VERIFIED"
+  },
+  "sources": [
+    {
+      "source_id": "molavi2026ieab",
+      "title": "Open-Source Iranian Enterprise AI Bridge (IEAB): Architectural Specification and Connector Implementation",
+      "source_type": "OPEN_SOURCE_IMPLEMENTATION",
+      "authors": ["Taghi Molavi"],
+      "publication_date": "2026",
+      "retrieved_at": "2026-10-07T10:00:00Z",
+      "doi": "",
+      "url": "https://github.com/tmolavi/iranian-enterprise-ai-bridge",
+      "venue": "Open-Source GitHub Repository",
+      "is_open_access": true,
+      "verification_status": "VERIFIED",
+      "verification_notes": "Primary software artifact implementing schema adapters, sanitization filters, and LLM bridges for Iranian ERP systems.",
+      "raw_provenance": "GitHub: tmolavi/iranian-enterprise-ai-bridge"
+    },
+    {
+      "source_id": "lewis2020retrieval",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "source_type": "PEER_REVIEWED",
+      "authors": ["Patrick Lewis", "Ethan Perez", "Aleksandra Piktus", "Fabio Petroni"],
+      "publication_date": "2020",
+      "retrieved_at": "2026-10-07T10:00:00Z",
+      "doi": "https://doi.org/10.48550/arXiv.2005.11401",
+      "url": "https://arxiv.org/abs/2005.11401",
+      "venue": "NeurIPS 2020",
+      "is_open_access": true,
+      "verification_status": "VERIFIED",
+      "verification_notes": "Grounding retrieval augmentation protocols.",
+      "raw_provenance": "OpenAlex:W3032542456"
+    },
+    {
+      "source_id": "davenport2020enterprise",
+      "title": "How to Make Enterprise AI Part of Your Daily Business Operations",
+      "source_type": "INDUSTRY_REPORT",
+      "authors": ["Thomas H. Davenport", "Nitin Mittal"],
+      "publication_date": "2020",
+      "retrieved_at": "2026-10-07T10:00:00Z",
+      "doi": "",
+      "url": "https://hbr.org/2020/12/how-to-make-enterprise-ai-part-of-your-daily-business-operations",
+      "venue": "Harvard Business Review",
+      "is_open_access": false,
+      "verification_status": "VERIFIED",
+      "verification_notes": "Enterprise integration challenges across legacy relational silos.",
+      "raw_provenance": "HBR Direct"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLM-101",
+      "claim": "Direct querying of legacy enterprise relational databases by unmediated LLMs creates security risks and schema hallucinations.",
+      "claim_type": "THEORETICAL_PROPOSITION",
+      "source_type": "INDUSTRY_REPORT",
+      "verification_status": "VERIFIED",
+      "evidence_strength": "STRONG",
+      "supporting_source_ids": ["davenport2020enterprise", "lewis2020retrieval"],
+      "contradictory_source_ids": [],
+      "location_in_source": "Section 2, Principles of Enterprise Data Integration",
+      "supports": ["RQ1"],
+      "contradicts": [],
+      "notes": "Motivates the necessity of a mediator broker layer."
+    },
+    {
+      "claim_id": "CLM-102",
+      "claim": "The Iranian Enterprise AI Bridge introduces an open mediator layer that decouples ERP databases from language model prompt pipelines through sanitized JSON-LD schemas.",
+      "claim_type": "ARCHITECTURAL_DESIGN",
+      "source_type": "OPEN_SOURCE_IMPLEMENTATION",
+      "verification_status": "VERIFIED",
+      "evidence_strength": "STRONG",
+      "supporting_source_ids": ["molavi2026ieab"],
+      "contradictory_source_ids": [],
+      "location_in_source": "packages/connectors/src/index.ts",
+      "supports": ["RQ1", "H1"],
+      "contradicts": [],
+      "notes": "Core open-source contribution in tmolavi/iranian-enterprise-ai-bridge."
+    }
+  ]
+}

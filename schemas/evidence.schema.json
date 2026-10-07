@@ -1,0 +1,221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/tmolavi/scholar-provenance/schemas/evidence.schema.json",
+  "title": "EvidenceLedger",
+  "description": "Schema for machine-readable academic evidence ledgers in ScholarProvenance.",
+  "type": "object",
+  "required": ["version", "project_title", "claims", "sources"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "enum": ["1.0.0", "1.1.0"]
+    },
+    "project_title": {
+      "type": "string",
+      "minLength": 3
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "provenance_policy": {
+      "type": "object",
+      "properties": {
+        "strict_zero_fabrication": {
+          "type": "boolean",
+          "default": true
+        },
+        "minimum_verification_for_factual_claims": {
+          "type": "string",
+          "enum": ["VERIFIED", "USER_PROVIDED", "PARTIALLY_VERIFIED"],
+          "default": "VERIFIED"
+        }
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/claim"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    }
+  },
+  "$defs": {
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "PEER_REVIEWED",
+        "PREPRINT",
+        "PRIMARY_DATA",
+        "EXPERIMENT",
+        "BENCHMARK",
+        "STANDARD",
+        "OFFICIAL_DOCUMENTATION",
+        "GOVERNMENT_SOURCE",
+        "INSTITUTIONAL_REPORT",
+        "OPEN_SOURCE_IMPLEMENTATION",
+        "VENDOR_CLAIM",
+        "INDUSTRY_REPORT",
+        "USER_PROVIDED",
+        "OBSERVATION",
+        "HYPOTHESIS",
+        "INTERPRETATION"
+      ]
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "VERIFIED",
+        "PARTIALLY_VERIFIED",
+        "USER_PROVIDED",
+        "UNVERIFIED",
+        "REJECTED"
+      ]
+    },
+    "evidence_strength": {
+      "type": "string",
+      "enum": [
+        "STRONG",
+        "MODERATE",
+        "PRELIMINARY",
+        "WEAK",
+        "INCONCLUSIVE"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "required": ["source_id", "title", "source_type", "verification_status"],
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "source_type": {
+          "$ref": "#/$defs/source_type"
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "publication_date": {
+          "type": "string"
+        },
+        "retrieved_at": {
+          "type": "string"
+        },
+        "doi": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "venue": {
+          "type": "string"
+        },
+        "is_open_access": {
+          "type": "boolean"
+        },
+        "verification_status": {
+          "$ref": "#/$defs/verification_status"
+        },
+        "verification_notes": {
+          "type": "string"
+        },
+        "raw_provenance": {
+          "type": "string",
+          "description": "File path, API query, or user reference where source was discovered"
+        }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "required": [
+        "claim_id",
+        "claim",
+        "claim_type",
+        "verification_status",
+        "evidence_strength",
+        "supporting_source_ids"
+      ],
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "pattern": "^CLM-[0-9]{3,}$"
+        },
+        "claim": {
+          "type": "string",
+          "minLength": 10
+        },
+        "claim_type": {
+          "type": "string",
+          "enum": [
+            "EMPIRICAL_FINDING",
+            "ARCHITECTURAL_DESIGN",
+            "BENCHMARK_RESULT",
+            "THEORETICAL_PROPOSITION",
+            "STATE_OF_ART_COMPARISON",
+            "METHODOLOGICAL_CHOICE",
+            "LIMITATION_DISCLOSURE",
+            "CONTRADICTORY_OBSERVATION"
+          ]
+        },
+        "source_type": {
+          "$ref": "#/$defs/source_type"
+        },
+        "verification_status": {
+          "$ref": "#/$defs/verification_status"
+        },
+        "evidence_strength": {
+          "$ref": "#/$defs/evidence_strength"
+        },
+        "supporting_source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contradictory_source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "location_in_source": {
+          "type": "string",
+          "description": "Page number, section, line range, or table ID in primary source"
+        },
+        "supports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Research questions or higher-level hypotheses supported by this claim"
+        },
+        "contradicts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Alternative hypotheses or prior literature contradicted"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

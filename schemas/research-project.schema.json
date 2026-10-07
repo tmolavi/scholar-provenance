@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/tmolavi/scholar-provenance/schemas/research-project.schema.json",
+  "title": "ResearchProjectManifest",
+  "description": "Validation schema for ScholarProvenance research project configurations.",
+  "type": "object",
+  "required": ["project", "inputs", "research", "outputs"],
+  "properties": {
+    "project": {
+      "type": "object",
+      "required": ["title", "paper_language", "research_type", "publication_mode"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 5
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "affiliation": {
+                "type": "string"
+              },
+              "orcid": {
+                "type": "string",
+                "pattern": "^([0-9]{4}-){3}[0-9]{3}[0-9X]$"
+              },
+              "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "corresponding": {
+                "type": "boolean",
+                "default": false
+              }
+            }
+          },
+          "description": "Human authors specified explicitly by user. Unset if independent/unaffiliated."
+        },
+        "ai_assistance_disclosure": {
+          "type": "object",
+          "properties": {
+            "disclose": {
+              "type": "boolean",
+              "default": true
+            },
+            "declaration_text": {
+              "type": "string"
+            }
+          }
+        },
+        "paper_language": {
+          "type": "string",
+          "description": "Target language for manuscript (e.g. en, fa, tr, az, ar, de, es, fr, zh)"
+        },
+        "working_language": {
+          "type": "string",
+          "default": "en",
+          "description": "Intermediate working language for agent notes and synthesis"
+        },
+        "source_languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": ["en"]
+        },
+        "citation_style": {
+          "type": "string",
+          "enum": ["apa", "ieee", "chicago", "harvard", "vancouver", "bibtex"],
+          "default": "ieee"
+        },
+        "target_venue": {
+          "type": "string",
+          "description": "Optional target conference, journal, or preprint platform (e.g., IEEE, ACM, arXiv, NeurIPS)"
+        },
+        "research_type": {
+          "type": "string",
+          "enum": [
+            "empirical",
+            "architecture",
+            "benchmark",
+            "case_study",
+            "literature_review",
+            "technical_report",
+            "replication",
+            "dataset_paper"
+          ]
+        },
+        "publication_mode": {
+          "type": "string",
+          "enum": [
+            "preprint",
+            "technical_report",
+            "conference_submission",
+            "journal_submission",
+            "institutional_repository",
+            "github_research_release"
+          ]
+        }
+      }
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "repositories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["url_or_path"],
+            "properties": {
+              "url_or_path": { "type": "string" },
+              "branch": { "type": "string", "default": "main" },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "websites": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["url"],
+            "properties": {
+              "url": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "datasets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["path_or_url"],
+            "properties": {
+              "path_or_url": { "type": "string" },
+              "format": { "type": "string" },
+              "license": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "research": {
+      "type": "object",
+      "properties": {
+        "external_search": {
+          "type": "boolean",
+          "default": true
+        },
+        "contradictory_evidence_search": {
+          "type": "boolean",
+          "default": true
+        },
+        "novelty_check": {
+          "type": "boolean",
+          "default": true
+        },
+        "citation_verification": {
+          "type": "string",
+          "enum": ["strict", "permissive"],
+          "default": "strict"
+        },
+        "freshness_check": {
+          "type": "boolean",
+          "default": true
+        },
+        "freshness_window_years": {
+          "type": "integer",
+          "default": 3
+        }
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "properties": {
+        "markdown": { "type": "boolean", "default": true },
+        "latex": { "type": "boolean", "default": true },
+        "bibtex": { "type": "boolean", "default": true },
+        "evidence_ledger": { "type": "boolean", "default": true },
+        "reproducibility_package": { "type": "boolean", "default": true }
+      }
+    }
+  }
+}

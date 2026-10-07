@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reproducible Latency Evaluation of Mediated Evidence Ledgers in AI Agent Systems</title>
+  <style>
+/* ScholarProvenance Academic Publication Design System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;500&display=swap');
+
+@page {
+  size: A4;
+  margin: 25mm 20mm 25mm 20mm;
+  @top-right {
+    font-family: "Inter", "Crimson Pro", "Helvetica Neue", Arial, sans-serif;
+    font-size: 8pt;
+    color: #64748b;
+    content: "ScholarProvenance Preprint";
+  }
+  @bottom-center {
+    font-family: "Inter", "Crimson Pro", "Helvetica Neue", Arial, sans-serif;
+    font-size: 9pt;
+    color: #475569;
+    content: counter(page);
+  }
+}
+
+@page :first {
+  @top-right { content: ""; }
+  @bottom-center { content: ""; }
+}
+
+:root {
+  --font-main: "Inter", "Crimson Pro", "Helvetica Neue", Arial, sans-serif;
+  --font-code: "Fira Code", monospace;
+  --color-primary: #0f172a;
+  --color-secondary: #334155;
+  --color-muted: #64748b;
+  --color-border: #cbd5e1;
+  --color-bg-subtle: #f8fafc;
+  --color-accent: #1e3a8a;
+}
+
+body {
+  direction: ltr;
+  text-align: left;
+  font-family: var(--font-main);
+  font-size: 10.5pt;
+  line-height: 1.65;
+  color: var(--color-primary);
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Cover & Title Section */
+.paper-cover {
+  page-break-after: always;
+  padding-top: 50mm;
+  text-align: center;
+}
+
+.paper-title {
+  font-size: 24pt;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--color-primary);
+  margin-bottom: 8mm;
+}
+
+.paper-subtitle {
+  font-size: 14pt;
+  font-weight: 400;
+  color: var(--color-muted);
+  margin-bottom: 12mm;
+}
+
+.paper-authors {
+  font-size: 11pt;
+  font-weight: 600;
+  color: var(--color-secondary);
+  margin-bottom: 4mm;
+}
+
+.author-affiliation {
+  font-size: 9.5pt;
+  color: var(--color-muted);
+  margin-bottom: 12mm;
+}
+
+.paper-meta-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-size: 8.5pt;
+  color: var(--color-muted);
+  margin-top: 15mm;
+}
+
+/* Abstract Block */
+.abstract-block {
+  margin: 15mm auto 10mm auto;
+  max-width: 90%;
+  padding: 10mm 12mm;
+  background-color: var(--color-bg-subtle);
+  border-left: 3px solid var(--color-accent);
+  border-right: none;
+  border-radius: 2px;
+}
+
+.abstract-title {
+  font-size: 11pt;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 4mm;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.abstract-text {
+  font-size: 9.5pt;
+  line-height: 1.55;
+  text-align: justify;
+}
+
+.keywords-line {
+  margin-top: 4mm;
+  font-size: 8.5pt;
+  color: var(--color-muted);
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+  color: var(--color-primary);
+  font-weight: 700;
+  page-break-after: avoid;
+}
+
+h1 {
+  font-size: 16pt;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 2mm;
+  margin-top: 10mm;
+  margin-bottom: 4mm;
+}
+
+h2 {
+  font-size: 13pt;
+  margin-top: 7mm;
+  margin-bottom: 3mm;
+}
+
+h3 {
+  font-size: 11pt;
+  margin-top: 5mm;
+  margin-bottom: 2mm;
+}
+
+p {
+  margin: 0 0 3.5mm 0;
+  text-align: justify;
+}
+
+/* Mixed RTL / LTR inline items */
+.latin-inline, .code-inline, .doi-inline, .url-inline {
+  direction: ltr;
+  unicode-bidi: embed;
+  display: inline-block;
+}
+
+code {
+  font-family: var(--font-code);
+  font-size: 9pt;
+  background-color: #f1f5f9;
+  padding: 1px 4px;
+  border-radius: 3px;
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+pre {
+  font-family: var(--font-code);
+  font-size: 8.5pt;
+  background-color: #0f172a;
+  color: #f8fafc;
+  padding: 10px 14px;
+  border-radius: 4px;
+  overflow-x: auto;
+  direction: ltr;
+  text-align: left;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 6mm 0;
+  font-size: 9pt;
+  page-break-inside: avoid;
+}
+
+th, td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+}
+
+th {
+  background-color: var(--color-bg-subtle);
+  font-weight: 700;
+  border-top: 1.5px solid var(--color-primary);
+  border-bottom: 1.5px solid var(--color-primary);
+}
+
+caption {
+  caption-side: top;
+  font-size: 9pt;
+  font-weight: 600;
+  margin-bottom: 2mm;
+  text-align: left;
+}
+
+/* Figures */
+figure {
+  margin: 7mm 0;
+  text-align: center;
+  page-break-inside: avoid;
+}
+
+figure img, figure svg {
+  max-width: 95%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+figcaption {
+  font-size: 8.5pt;
+  color: var(--color-muted);
+  margin-top: 3mm;
+}
+
+/* References */
+.references-list {
+  list-style-type: none;
+  padding-left: 0;
+  font-size: 9pt;
+  line-height: 1.45;
+}
+
+.references-list li {
+  margin-bottom: 3.5mm;
+  padding-left: 6mm;
+  text-indent: -6mm;
+}
+
+  </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": "Reproducible Latency Evaluation of Mediated Evidence Ledgers in AI Agent Systems",
+  "inLanguage": "en",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Taghi Molavi",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Independent Researcher"
+      }
+    }
+  ],
+  "datePublished": "2026-10-07",
+  "keywords": [
+    "research",
+    "evidence-based"
+  ],
+  "license": "https://opensource.org/licenses/MIT"
+}
+  </script>
+</head>
+<body>
+
+<div class="paper-cover">
+  <div class="paper-title">Reproducible Latency Evaluation of Mediated Evidence Ledgers in AI Agent Systems</div>
+  
+  <div class="paper-authors">Taghi Molavi</div>
+  <div class="author-affiliation">Independent Researcher</div>
+  <div class="paper-meta-badge">
+    <strong>ScholarProvenance</strong> | Version: 0.1.0 | License: MIT | Mode: Preprint
+  </div>
+</div>
+
+
+<main>
+<h1>Reproducible Latency Evaluation of Mediated Evidence Ledgers in AI Agent Systems</h1>
+<h2>Abstract</h2>
+<p>Autonomous AI agents increasingly rely on external knowledge retrieval to mitigate factual hallucinations. While retrieval augmentation is well established in natural language generation, the operational latency and throughput characteristics of structured, in-memory evidence ledgers under concurrent client loads remain under-explored. In this empirical study, we evaluate an in-memory evidence ledger mediating query verification against an unvalidated baseline across concurrency levels from 1 to 50 threads. Our measurements indicate that the mediated ledger architecture achieved a single-query latency of 48.5 ms compared to 245.2 ms in the baseline configuration, scaling to 342.9 queries per second under 50 concurrent threads. We analyze serialization trade-offs, identify cold-start memory overheads, and provide an open-source reproducibility package with cryptographic checksums.</p>
+<h2>1. Introduction</h2>
+<p>The integration of large language models (LLMs) into autonomous workflow agents introduces substantial risks of factual confabulation when models operate solely on parametric memory. Prior empirical research demonstrates that conditioning generation on retrieved evidence significantly reduces hallucination rates [@lewis2020retrieval; @shuster2021retrieval]. However, repeatedly invoking external vector search indexes or remote search engines introduces substantial latency bottlenecks.</p>
+<p>In this work, we investigate whether maintaining a structured in-memory evidence ledger with schema-enforced taxonomy checks can provide low-latency query mediation without sacrificing verification rigor.</p>
+<h2>2. Background and Related Work</h2>
+<p>Retrieval-Augmented Generation (RAG) was formally introduced by Lewis et al. <cite class="citation-key">[lewis2020retrieval]</cite>, combining pre-trained sequence-to-sequence models with dense vector retrieval over Wikipedia dumps. Shuster et al. <cite class="citation-key">[shuster2021retrieval]</cite> subsequently demonstrated that retrieval augmentation dramatically reduces conversational hallucination in multi-turn dialogues. </p>
+<p>Despite these foundational advances, existing literature primarily evaluates generation perplexity and retrieval recall, leaving runtime systems engineering questions—such as schema validation cost and concurrent thread scaling—under-addressed.</p>
+<h2>3. Experimental Methodology</h2>
+<p>We conducted controlled microbenchmarks using a multi-threaded workload generator simulating concurrent agent query streams. We evaluated two configurations under identical hardware conditions (Apple M-series silicon, 16 GB unified RAM):</p>
+<p>1. <strong>Baseline (Unvalidated Retrieval):</strong> Queries trigger unindexed lookups without structured caching.</p>
+<p>2. <strong>Mediated Ledger:</strong> Queries are intercepted by an in-memory evidence matrix enforcing canonical taxonomy validation before dispatch.</p>
+<table><thead><tr><th>Trial</th><th>Configuration</th><th>Concurrency</th><th>p95 Latency (ms)</th><th>Throughput (QPS)</th><th>Memory (MB)</th></tr></thead><tbody><tr><td>1</td><td>Baseline</td><td>1</td><td>245.2</td><td>4.08</td><td>128.4</td></tr><tr><td>2</td><td>Baseline</td><td>10</td><td>312.8</td><td>31.97</td><td>142.0</td></tr><tr><td>3</td><td>Baseline</td><td>50</td><td>680.1</td><td>73.52</td><td>198.5</td></tr><tr><td>4</td><td>Mediated Ledger</td><td>1</td><td>48.5</td><td>20.62</td><td>92.1</td></tr><tr><td>5</td><td>Mediated Ledger</td><td>10</td><td>62.3</td><td>160.51</td><td>105.4</td></tr><tr><td>6</td><td>Mediated Ledger</td><td>50</td><td>145.8</td><td>342.94</td><td>134.2</td></tr></tbody></table>
+<p><em>Table 1: Experimental benchmark telemetry across concurrency tiers <cite class="citation-key">[benchmark_trial_csv]</cite>.</em></p>
+<figure><img src="assets/figure-1.svg" alt="Latency Comparison Across Concurrency Levels (ms)" /><figcaption>Latency Comparison Across Concurrency Levels (ms)</figcaption></figure>
+<h2>4. Results and Discussion</h2>
+<p>As shown in Table 1 and Figure 1, the mediated evidence ledger configuration achieved substantially lower p95 latency across all concurrency levels. At concurrency $C=1$, latency dropped from 245.2 ms to 48.5 ms. Under 50 concurrent threads, the mediated architecture sustained 342.9 queries per second while maintaining a memory footprint under 135 MB.</p>
+<p>These findings support Hypothesis $H_1$, suggesting that pre-validated in-memory ledgers effectively shield agent runtimes from high-latency external retrieval loops.</p>
+<h2>5. Limitations and Threats to Validity</h2>
+<ul>
+<li><strong>Internal Validity:</strong> The evaluation was conducted on an isolated local test harness. Remote network latency was simulated with constant delay distributions rather than real-world wide-area packet jitter.</li>
+<li><strong>Construct Validity:</strong> Queries evaluated were synthetically generated and may not capture the full semantic heterogeneity of complex production multi-agent environments.</li>
+<li><strong>External Validity:</strong> Memory consumption was measured for in-memory ledger sizes up to 10,000 claims. Larger corpus sizes will require external distributed caching.</li>
+</ul>
+<h2>6. Conclusion</h2>
+<p>Structured evidence ledgers provide an effective architectural mechanism for reducing verification latency in autonomous AI agents while preserving provenance traceability. Complete replication scripts, data files, and SHA-256 digests are available in the reproducibility directory.</p>
+<h2>AI Assistance Disclosure</h2>
+<p>The authors disclose that an AI research agent running ScholarProvenance assisted in evidence ledger formatting, citation verification, and SVG chart generation. All experimental benchmark trials were conducted and verified by the authors.</p>
+<h2>References</h2>
+<ul>
+<li>Lewis, P. et al. (2020). Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. <em>NeurIPS</em>.</li>
+<li>Shuster, K. et al. (2021). Retrieval Augmentation Reduces Hallucination in Conversation. <em>arXiv preprint</em>.</li>
+<li>Molavi, T. (2026). Local Evidence Ledger Benchmark Trials (2026). <em>ScholarProvenance Empirical Suite</em>.</li>
+</ul>
+</main>
+</body>
+</html>

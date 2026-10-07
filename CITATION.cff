@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use ScholarProvenance in your research, workflows, or publications, please cite it as below."
+title: "ScholarProvenance: Academic Evidence, Literature Verification & Paper Generation Skill"
+abstract: "A portable, evidence-first AI agent skill and workflow for turning technical repositories, benchmark datasets, experiments, architecture docs, and notes into verifiable academic research papers with strict evidence ledgers, zero citation fabrication, and multi-language support."
+authors:
+  - family-names: "Molavi"
+    given-names: "Taghi"
+    website: "https://molavi.pro"
+version: "0.1.0"
+date-released: "2026-10-07"
+license: "MIT"
+repository-code: "https://github.com/tmolavi/scholar-provenance"
+url: "https://github.com/tmolavi/scholar-provenance"
+keywords:
+  - "academic research"
+  - "research agent"
+  - "citation verification"
+  - "evidence matrix"
+  - "reproducible research"
+  - "multilingual research"
+  - "open science"

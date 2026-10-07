@@ -1,0 +1,101 @@
+{
+  "version": "1.0.0",
+  "project_title": "Reproducible Latency Evaluation of Mediated Evidence Ledgers in AI Agent Systems",
+  "generated_at": "2026-10-07T10:00:00Z",
+  "last_updated": "2026-10-07T10:00:00Z",
+  "provenance_policy": {
+    "strict_zero_fabrication": true,
+    "minimum_verification_for_factual_claims": "VERIFIED"
+  },
+  "sources": [
+    {
+      "source_id": "lewis2020retrieval",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "source_type": "PEER_REVIEWED",
+      "authors": ["Patrick Lewis", "Ethan Perez", "Aleksandra Piktus", "Fabio Petroni"],
+      "publication_date": "2020",
+      "retrieved_at": "2026-10-07T10:00:00Z",
+      "doi": "https://doi.org/10.48550/arXiv.2005.11401",
+      "url": "https://arxiv.org/abs/2005.11401",
+      "venue": "NeurIPS 2020",
+      "is_open_access": true,
+      "verification_status": "VERIFIED",
+      "verification_notes": "Seminal RAG publication establishing external memory retrieval architecture.",
+      "raw_provenance": "OpenAlex:W3032542456"
+    },
+    {
+      "source_id": "shuster2021retrieval",
+      "title": "Retrieval Augmentation Reduces Hallucination in Conversation",
+      "source_type": "PREPRINT",
+      "authors": ["Kurt Shuster", "Spencer Poff", "Moya Chen", "Douwe Kiela", "Jason Weston"],
+      "publication_date": "2021",
+      "retrieved_at": "2026-10-07T10:00:00Z",
+      "doi": "https://doi.org/10.48550/arXiv.2104.07567",
+      "url": "https://arxiv.org/abs/2104.07567",
+      "venue": "arXiv preprint",
+      "is_open_access": true,
+      "verification_status": "VERIFIED",
+      "verification_notes": "Empirical study measuring conversational hallucination reduction via retrieval.",
+      "raw_provenance": "arXiv:2104.07567"
+    },
+    {
+      "source_id": "benchmark_trial_csv",
+      "title": "Local Evidence Ledger Benchmark Trials (2026)",
+      "source_type": "EXPERIMENT",
+      "authors": ["Taghi Molavi"],
+      "publication_date": "2026-10-07",
+      "retrieved_at": "2026-10-07T10:00:00Z",
+      "doi": "",
+      "url": "inputs/benchmark_results.csv",
+      "venue": "ScholarProvenance Test Environment",
+      "is_open_access": true,
+      "verification_status": "USER_PROVIDED",
+      "verification_notes": "Primary quantitative telemetry captured across 6 trial conditions.",
+      "raw_provenance": "Local file: inputs/benchmark_results.csv"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "CLM-001",
+      "claim": "External knowledge retrieval significantly reduces factual hallucination rates in neural generative systems.",
+      "claim_type": "EMPIRICAL_FINDING",
+      "source_type": "PEER_REVIEWED",
+      "verification_status": "VERIFIED",
+      "evidence_strength": "STRONG",
+      "supporting_source_ids": ["lewis2020retrieval", "shuster2021retrieval"],
+      "contradictory_source_ids": [],
+      "location_in_source": "Section 4.1, Table 2",
+      "supports": ["RQ1"],
+      "contradicts": [],
+      "notes": "Foundational grounding for why agent architectures require external evidence layers."
+    },
+    {
+      "claim_id": "CLM-002",
+      "claim": "In our experimental setup, the mediated evidence ledger configuration achieved 48.5 ms single-query latency compared to 245.2 ms in unvalidated baseline retrieval.",
+      "claim_type": "BENCHMARK_RESULT",
+      "source_type": "EXPERIMENT",
+      "verification_status": "USER_PROVIDED",
+      "evidence_strength": "STRONG",
+      "supporting_source_ids": ["benchmark_trial_csv"],
+      "contradictory_source_ids": [],
+      "location_in_source": "inputs/benchmark_results.csv, Trial 4",
+      "supports": ["RQ1", "H1"],
+      "contradicts": [],
+      "notes": "Direct primary measurement under isolated hardware test conditions."
+    },
+    {
+      "claim_id": "CLM-003",
+      "claim": "Under 50 concurrent client threads, the mediated architecture achieved 342.9 queries per second compared to 73.5 in the baseline.",
+      "claim_type": "BENCHMARK_RESULT",
+      "source_type": "EXPERIMENT",
+      "verification_status": "USER_PROVIDED",
+      "evidence_strength": "MODERATE",
+      "supporting_source_ids": ["benchmark_trial_csv"],
+      "contradictory_source_ids": [],
+      "location_in_source": "inputs/benchmark_results.csv, Trial 6",
+      "supports": ["RQ1", "RQ2"],
+      "contradicts": [],
+      "notes": "Throughput scaling under local synthetic load."
+    }
+  ]
+}

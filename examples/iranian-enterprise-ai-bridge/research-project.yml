@@ -1,0 +1,42 @@
+project:
+  title: "From ERP Data to AI-Ready Enterprise Intelligence: An Open Architecture for Connecting Legacy ERP Systems to Large Language Models"
+  authors:
+    - name: "Taghi Molavi"
+      affiliation: "Independent Researcher"
+      email: "info@molavi.pro"
+      corresponding: true
+  ai_assistance_disclosure:
+    disclose: true
+    declaration_text: "The author used ScholarProvenance to format the evidence ledger, audit citations, and compile publication artifacts. All architectural designs and code implementations were authored and verified by the human author."
+  paper_language: "en"
+  working_language: "en"
+  source_languages: ["en", "fa"]
+  citation_style: "ieee"
+  target_venue: "arXiv"
+  research_type: "architecture"
+  publication_mode: "preprint"
+
+inputs:
+  repositories:
+    - url_or_path: "https://github.com/tmolavi/iranian-enterprise-ai-bridge"
+      branch: "main"
+      description: "Open-Source Iranian Enterprise AI Bridge implementation"
+  websites: []
+  files: []
+  datasets: []
+  notes: []
+
+research:
+  external_search: true
+  contradictory_evidence_search: true
+  novelty_check: true
+  citation_verification: "strict"
+  freshness_check: true
+  freshness_window_years: 3
+
+outputs:
+  markdown: true
+  latex: true
+  bibtex: true
+  evidence_ledger: true
+  reproducibility_package: true
