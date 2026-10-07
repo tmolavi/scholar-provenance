@@ -1,9 +1,9 @@
 ---
 name: scholar-provenance
-description: "Turn technical repositories, benchmark datasets, experiments, architecture docs, and notes into verifiable, peer-review-defensible academic research papers with strict evidence ledgers, zero citation fabrication, and multi-language support."
+description: "Turn technical repositories, benchmark datasets, experiments, architecture docs, and notes into verifiable, peer-review-defensible academic research papers with strict evidence ledgers, zero citation fabrication, autonomous multi-target publishing, and multi-language support."
 category: research
-tags: [academic-paper, research-agent, citation-verification, evidence-matrix, peer-review, reproducibility, multilingual]
-version: "0.1.0"
+tags: [academic-paper, research-agent, citation-verification, evidence-matrix, peer-review, reproducibility, auto-publish, multilingual]
+version: "0.2.0"
 date_created: "2026-10-07"
 ---
 
