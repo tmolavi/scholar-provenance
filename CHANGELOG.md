@@ -5,6 +5,15 @@ All notable changes to **ScholarProvenance** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-10-08
+
+### Added
+- **Academic Distribution & Social Metadata Kit:** Automated generation of `paper/publication-kit.md` and `paper/publication-metadata.json` during `scholar-provenance build` or standalone invocation.
+- **Platform Copy-Paste Ready Blocks:** Structured metadata tailored for self-archiving platforms (Academia.edu, ResearchGate, SSRN, arXiv) including Native Title (BiDi-safe), English Title, Bilingual Title, Native Abstract, English Abstract, and integrated Bilingual Abstract with repository links.
+- **Top 20 Academic Taxonomy Tags:** Algorithmic extraction and categorization of 20 high-impact English research tags mapped into 4 domain taxonomies for maximum search indexation and platform visibility.
+- **Social Feed & Discussion Starters:** Proactive generation of ready-to-share social announcements ("Introduce Your Research") and author engineering philosophy notes for forum questions and community discussion prompts.
+- **New CLI Subcommand:** `scholar-provenance publish-kit` for on-demand generation and terminal previewing of distribution kits.
+
 ## [0.3.0] - 2026-10-08
 
 ### Added

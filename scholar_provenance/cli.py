@@ -22,6 +22,7 @@ from scholar_provenance.reproducibility import generate_reproducibility_package
 from scholar_provenance.visuals import generate_bar_chart_svg, generate_architecture_diagram_svg, VisualAsset, VisualManifestManager
 from scholar_provenance.generator import render_full_html_document, render_pdf_from_html, render_docx_manuscript
 from scholar_provenance.publisher import get_publication_recommendations, publish_release
+from scholar_provenance.distribution import generate_publication_kit
 from scholar_provenance.intake import (
     run_interactive_intake,
     check_intake_approval,
@@ -354,7 +355,54 @@ def cmd_build(args: argparse.Namespace) -> int:
         if ok_docx:
             print(f"✅ Built DOCX: {out_docx}")
 
+    # 4. Academic Distribution Kit (publication-kit.md and publication-metadata.json)
+    try:
+        kit_md, kit_json, _ = generate_publication_kit(
+            manuscript_path=manu_p,
+            manifest_path=manifest_p,
+            output_dir=paper_dir,
+        )
+        print(f"✅ Generated Academic Distribution Kit: {kit_md}")
+        print(f"✅ Generated Structured Metadata: {kit_json}")
+    except Exception as e:
+        print(f"⚠️ Warning: Failed to generate publication distribution kit: {e}", file=sys.stderr)
+
     return 0
+
+
+def cmd_publish_kit(args: argparse.Namespace) -> int:
+    """Generate academic distribution kit and social metadata for Academia.edu, ResearchGate, SSRN, etc."""
+    manu_p = Path(args.manuscript).resolve() if args.manuscript else Path("paper/manuscript.md").resolve()
+    if not manu_p.exists():
+        if Path("manuscript.md").exists():
+            manu_p = Path("manuscript.md").resolve()
+        else:
+            print(f"Error: Manuscript '{manu_p}' not found.", file=sys.stderr)
+            return 1
+
+    manifest_p = Path(args.manifest).resolve() if args.manifest else None
+    out_dir = Path(args.output_dir).resolve() if args.output_dir else manu_p.parent
+
+    try:
+        kit_md, kit_json, meta_dict = generate_publication_kit(
+            manuscript_path=manu_p,
+            manifest_path=manifest_p,
+            output_dir=out_dir,
+        )
+        print(f"✅ Generated Academic Distribution Kit: {kit_md}")
+        print(f"✅ Generated Structured Metadata: {kit_json}")
+        print(f"📋 Title: {meta_dict['title']['bilingual']}")
+        tags_preview = meta_dict['research_interests_tags']['comma_separated']
+        if len(tags_preview) > 90:
+            tags_preview = tags_preview[:87] + "..."
+        print(f"🏷️ Top 20 Tags: {tags_preview}")
+        if getattr(args, "preview", False):
+            print("\n--- Preview: publication-kit.md ---\n")
+            print(kit_md.read_text(encoding="utf-8"))
+        return 0
+    except Exception as e:
+        print(f"Error generating academic distribution kit: {e}", file=sys.stderr)
+        return 1
 
 
 def cmd_chart(args: argparse.Namespace) -> int:
@@ -644,6 +692,13 @@ def main(argv: Optional[List[str]] = None) -> int:
     p_pub.add_argument("--dry-run", action="store_true", help="Simulate release generation without pushing to remotes")
     p_pub.add_argument("--recommend", action="store_true", help="Display proactive venue & archive recommendations")
 
+    # publish-kit
+    p_pkit = subparsers.add_parser("publish-kit", help="Generate academic distribution kit (publication-kit.md & publication-metadata.json)")
+    p_pkit.add_argument("manuscript", nargs="?", default="paper/manuscript.md", help="Path to manuscript.md (default: paper/manuscript.md)")
+    p_pkit.add_argument("--manifest", help="Path to research-project.yml or research-brief.yaml")
+    p_pkit.add_argument("--output-dir", help="Output directory for generated kit (defaults to manuscript folder)")
+    p_pkit.add_argument("--preview", action="store_true", help="Print publication-kit.md to stdout")
+
     # intake
     p_intake = subparsers.add_parser("intake", help="Mandatory research intake & interactive onboarding")
     p_intake.add_argument("path", nargs="?", default=".", help="Project workspace directory")
@@ -679,6 +734,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "chart": cmd_chart,
         "showcase": cmd_showcase,
         "publish": cmd_publish,
+        "publish-kit": cmd_publish_kit,
         "intake": cmd_intake,
     }
 

@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-10-08T08:44:42.022916+00:00",
+  "manuscript_source": "/Users/taghimolavi/Downloads/git/scholar-provenance/examples/demo-minimal/paper/manuscript.md",
+  "title": {
+    "native": "Reproducible Latency Evaluation of Mediated Evidence Ledgers in AI Agent Systems",
+    "english": "Reproducible Latency Evaluation of Mediated Evidence Ledgers in AI Agent Systems",
+    "bilingual": "Reproducible Latency Evaluation of Mediated Evidence Ledgers in AI Agent Systems",
+    "is_rtl": false
+  },
+  "abstract": {
+    "native": "Autonomous AI agents increasingly rely on external knowledge retrieval to mitigate factual hallucinations. While retrieval augmentation is well established in natural language generation, the operational latency and throughput characteristics of structured, in-memory evidence ledgers under concurrent client loads remain under-explored. In this empirical study, we evaluate an in-memory evidence ledger mediating query verification against an unvalidated baseline across concurrency levels from 1 to 50 threads. Our measurements indicate that the mediated ledger architecture achieved a single-query latency of 48.5 ms compared to 245.2 ms in the baseline configuration, scaling to 342.9 queries per second under 50 concurrent threads. We analyze serialization trade-offs, identify cold-start memory overheads, and provide an open-source reproducibility package with cryptographic checksums.",
+    "english": "Autonomous AI agents increasingly rely on external knowledge retrieval to mitigate factual hallucinations. While retrieval augmentation is well established in natural language generation, the operational latency and throughput characteristics of structured, in-memory evidence ledgers under concurrent client loads remain under-explored. In this empirical study, we evaluate an in-memory evidence ledger mediating query verification against an unvalidated baseline across concurrency levels from 1 to 50 threads. Our measurements indicate that the mediated ledger architecture achieved a single-query latency of 48.5 ms compared to 245.2 ms in the baseline configuration, scaling to 342.9 queries per second under 50 concurrent threads. We analyze serialization trade-offs, identify cold-start memory overheads, and provide an open-source reproducibility package with cryptographic checksums.",
+    "bilingual": "Autonomous AI agents increasingly rely on external knowledge retrieval to mitigate factual hallucinations. While retrieval augmentation is well established in natural language generation, the operational latency and throughput characteristics of structured, in-memory evidence ledgers under concurrent client loads remain under-explored. In this empirical study, we evaluate an in-memory evidence ledger mediating query verification against an unvalidated baseline across concurrency levels from 1 to 50 threads. Our measurements indicate that the mediated ledger architecture achieved a single-query latency of 48.5 ms compared to 245.2 ms in the baseline configuration, scaling to 342.9 queries per second under 50 concurrent threads. We analyze serialization trade-offs, identify cold-start memory overheads, and provide an open-source reproducibility package with cryptographic checksums.\n\n🔗 Author Website: https://molavi.pro | Code Repository: https://github.com/tmolavi/scholar-provenance"
+  },
+  "publication": {
+    "suggested_venue": "arXiv",
+    "year": 2026,
+    "doi_guidance": "Leave blank for initial Preprint upload (Zenodo automatically mints a permanent DOI upon GitHub Release)",
+    "status": "Preprint / Technical Report",
+    "license": "CC-BY-4.0"
+  },
+  "authors": [
+    {
+      "name": "Taghi Molavi",
+      "affiliation": "Independent Researcher",
+      "email": "info@molavi.pro",
+      "orcid": "",
+      "website": "https://molavi.pro",
+      "role": "Author"
+    }
+  ],
+  "research_interests_tags": {
+    "total_count": 20,
+    "comma_separated": "Large Language Models (LLMs), Software Engineering, Empirical Software Engineering, Schema Sanitization, Legacy System Modernization, Natural Language Processing (NLP), Systems Architecture, Benchmarking & Performance Evaluation, Open Science, Information Systems Management, Retrieval-Augmented Generation (RAG), Distributed Systems, Reproducible Research, Cryptographic Verification, Autonomous AI Agents, Enterprise Architecture, Latency Optimization, AI Agent Systems, Database Systems, High-Throughput Systems",
+    "tags_list": [
+      "Large Language Models (LLMs)",
+      "Software Engineering",
+      "Empirical Software Engineering",
+      "Schema Sanitization",
+      "Legacy System Modernization",
+      "Natural Language Processing (NLP)",
+      "Systems Architecture",
+      "Benchmarking & Performance Evaluation",
+      "Open Science",
+      "Information Systems Management",
+      "Retrieval-Augmented Generation (RAG)",
+      "Distributed Systems",
+      "Reproducible Research",
+      "Cryptographic Verification",
+      "Autonomous AI Agents",
+      "Enterprise Architecture",
+      "Latency Optimization",
+      "AI Agent Systems",
+      "Database Systems",
+      "High-Throughput Systems"
+    ],
+    "categorized": {
+      "Core Domains & Disciplines": [
+        "Large Language Models (LLMs)",
+        "Software Engineering",
+        "Schema Sanitization",
+        "Natural Language Processing (NLP)",
+        "Open Science",
+        "Cryptographic Verification",
+        "Autonomous AI Agents"
+      ],
+      "Methodologies & Evaluation": [
+        "Empirical Software Engineering",
+        "Benchmarking & Performance Evaluation",
+        "Retrieval-Augmented Generation (RAG)",
+        "Reproducible Research",
+        "Latency Optimization"
+      ],
+      "Systems & Architectures": [
+        "Legacy System Modernization",
+        "Systems Architecture",
+        "Information Systems Management",
+        "Distributed Systems",
+        "Enterprise Architecture",
+        "AI Agent Systems",
+        "Database Systems",
+        "High-Throughput Systems"
+      ],
+      "Impact & Industrial Applications": []
+    }
+  },
+  "announcements": {
+    "feed_announcement": "🚀 Excited to share our latest research publication: \"Reproducible Latency Evaluation of Mediated Evidence Ledgers in AI Agent Systems\"!\n\n📌 Key Highlights:\n• Rigorous, evidence-backed evaluation with cryptographic reproducibility.\n• Open-source architecture addressing critical system latency and integration invariants.\n• Comprehensive benchmark dataset and verifiable claims ledger included.\n\n📖 Read the full open-access manuscript and explore the reproducibility package:\nhttps://molavi.pro | https://github.com/tmolavi/scholar-provenance\n\n#Research #OpenScience #ArtificialIntelligence #SoftwareEngineering #Architecture #TechPreprint"
+  },
+  "discussion": {
+    "author_thoughts": "\"In developing Reproducible Latency Evaluation of Mediated Evidence Ledgers in AI Agent Systems, our primary objective was to move beyond speculative demonstrations and establish an auditable, production-grade foundation. By anchoring every architectural claim in verifiable telemetry, we hope this provides practitioners and scholars with a genuinely reproducible blueprint.\"",
+    "discussion_prompt": "What are your thoughts on this architectural paradigm? How is your team addressing latency, data governance, and verification invariants in similar production environments? We welcome peer feedback and collaborative extensions!"
+  },
+  "links": {
+    "repository": "https://github.com/tmolavi/scholar-provenance",
+    "author_website": "https://molavi.pro"
+  }
+}

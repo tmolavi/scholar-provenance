@@ -3,7 +3,7 @@ name: scholar-provenance
 description: "Turn technical repositories, benchmark datasets, experiments, architecture docs, and notes into verifiable, peer-review-defensible academic research papers with strict evidence ledgers, zero citation fabrication, autonomous multi-target publishing, and multi-language support."
 category: research
 tags: [academic-paper, research-agent, citation-verification, evidence-matrix, peer-review, reproducibility, auto-publish, multilingual]
-version: "0.3.0"
+version: "0.4.0"
 date_created: "2026-10-08"
 ---
 
@@ -324,4 +324,17 @@ When the user approves or requests publishing, the agent or CLI autonomously exe
    - `paper/overleaf_bundle.zip`: Formatted archive for one-click Overleaf import.
    - `.zenodo.json`: Machine-readable metadata for CERN Zenodo permanent archival and DOI minting.
 4. **Publishes Live GitHub Release**: Uses `scholar-provenance publish --target github` (or `gh release create`) to tag the commit, publish the release notes, and attach the compiled PDF and distribution bundles.
+
+### 9.3. Academic Distribution & Social Metadata Kit (Academia.edu, ResearchGate, SSRN)
+
+Whenever `scholar-provenance build` is compiled or `scholar-provenance publish-kit` is invoked, the system automatically writes:
+1. `paper/publication-kit.md`: Complete copy-paste ready blocks:
+   - **Paper Title**: Native Script Title (BiDi-safe), English Title, and combined Bilingual Title.
+   - **Abstract**: Native Abstract, English Abstract, and integrated Bilingual Abstract with author website and repository links.
+   - **Publication Details**: Suggested venue (e.g. *Technical Report & Architecture Specification*), publication year, and explicit DOI guidance for Preprints.
+   - **Authors & Affiliations**: Formatted for standard platform metadata boxes.
+   - **Research Interests (Top 20 Academic Tags)**: Comma-separated list ready to copy into search tag fields, plus taxonomy categorization into 4 domains.
+   - **Introduce Your Research**: Professional bilingual feed announcement for Academia.edu and LinkedIn.
+   - **Author's Thoughts & Discussion**: Engineering philosophy and peer discussion starter prompts.
+2. `paper/publication-metadata.json`: Machine-readable JSON structured for programmatic ingest and cross-platform automation.
 

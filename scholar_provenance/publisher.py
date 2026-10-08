@@ -19,6 +19,12 @@ from typing import Any, Dict, List, Optional, Tuple
 import zipfile
 import yaml
 
+from scholar_provenance.distribution import (
+    DistributionMetadata,
+    extract_distribution_metadata,
+    generate_publication_kit,
+)
+
 
 @dataclass
 class PublicationMetadata:
@@ -394,6 +400,16 @@ def publish_release(
     notes_file = paper_dir / "RELEASE_NOTES.md"
     notes_file.write_text(notes, encoding="utf-8")
 
+    # Generate Academic Distribution Kit if manuscript exists
+    manu_p = paper_dir / "manuscript.md"
+    kit_file = None
+    if manu_p.exists():
+        try:
+            kit_p, _, _ = generate_publication_kit(manu_p, output_dir=paper_dir)
+            kit_file = str(kit_p)
+        except Exception:
+            pass
+
     # Generate Zenodo metadata
     zenodo_file = generate_zenodo_metadata(p_dir)
 
@@ -403,6 +419,7 @@ def publish_release(
         "metadata": meta.to_dict(),
         "release_notes_file": str(notes_file),
         "zenodo_file": str(zenodo_file),
+        "publication_kit_file": kit_file,
         "artifacts_created": [],
     }
 

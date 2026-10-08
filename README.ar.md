@@ -82,6 +82,7 @@
    - خطوط عربية أكاديمية متقنة (**Noto Sans Arabic**).
    - دمج المصطلحات الإنجليزية وأرقام DOI بدقة (Bidirectional Unicode).
 4. **مخرجات متعددة التنسيقات:** إنتاج متزامن لمستندات HTML5 المعيارية، وملفات PDF الأرشيفية، ومستندات Word (DOCX) القابلة للتحرير، وصيغ LaTeX وBibTeX.
+5. **حزمة النشر الأكاديمي والبيانات الوصفية (Academic Distribution Kit):** إنتاج فوري لملف `paper/publication-kit.md` وملف JSON عبر `scholar-provenance build` أو `scholar-provenance publish-kit` لسهولة الرفع على منصات Academia.edu وResearchGate، شاملاً العناوين الثنائية، والملخصات المترابطة، و20 وسماً بحثياً دقيقاً، ومنشورات الترويج الأكاديمي.
 
 ---
 

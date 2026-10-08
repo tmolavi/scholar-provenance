@@ -79,6 +79,7 @@ Aşama 12: Güvenlik Taraması ve 12 Kalite Kapısı Onayı
 2. **Kullanıcı Kaynakları Yönü Belirler:** Kullanıcının sunduğu kanıtlar çalışmanın odağını oluşturur; harici literatür araştırması konuyu değiştiremez.
 3. **Çok Formatlı Çıktı:** Tek bir kaynak metinden semantik HTML5, WeasyPrint tabanlı PDF, düzenlenebilir DOCX ve LaTeX/BibTeX üretilir.
 4. **Saf Vektör SVG Grafikleri:** Harici kütüphane gerektirmeyen akademik çubuk grafikler ve mimari diyagramları.
+5. **Akademik Dağıtım Kiti (Academia.edu ve ResearchGate İçin Hazır Metadizi):** `scholar-provenance build` veya `scholar-provenance publish-kit` ile doğrudan `paper/publication-kit.md` ve `paper/publication-metadata.json` üretilir; kopyala-yapıştır başlıklar, iki dilli özetler, 20 uzman taksonomi etiketi ve sosyal akış tanıtımları sunulur.
 
 ---
 

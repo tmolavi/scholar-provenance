@@ -79,6 +79,14 @@ Mərhələ 12: Məxfilik Yoxlanışı və 12 Keyfiyyət Qapısının Təsdiqi
 pip install git+https://github.com/tmolavi/scholar-provenance.git
 ```
 
+## Elmi Nəşr və Metaməlumat Kiti (Academic Distribution Kit)
+
+`scholar-provenance build` və ya `scholar-provenance publish-kit` əmri ilə Academia.edu və ResearchGate platformaları üçün hazır nüsxə kiti (`paper/publication-kit.md` və `paper/publication-metadata.json`) avtomatik tərtib edilir:
+- **Hazır Başlıqlar və Xülasələr:** Doğma dil, İngilis dili və İkidilli birləşmiş başlıqlar və keçidli xülasələr.
+- **Top 20 Elmi Etiket (Top 20 Tags):** Axtarış sistemlərində maksimum görünürlük üçün 4 sahədə qruplaşdırılmış açar sözlər.
+- **Nəşr Göstərişləri:** Preprints üçün DOI və nəşr ili qaydaları.
+- **Sosial Bildirişlər və Müzakirə:** Academia.edu və LinkedIn üçün hazır tanıtım postları və mühəndislik fəlsəfəsi qeydləri.
+
 ## Başlanğıc — Məcburi İlkin Sorğu (Research Intake)
 
 Məqalənin yazılışına başlamazdan əvvəl, ScholarProvenance tədqiqatın əsas sübutlarını və nəşr hədəflərini müəyyənləşdirmək üçün **İlkin Mülakat** aparır və tədqiqat planı (`research-brief.yaml`) təsdiq edilmədən qaralama mərhələsinə keçmir.

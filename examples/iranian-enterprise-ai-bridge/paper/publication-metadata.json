@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-10-08T08:44:42.381871+00:00",
+  "manuscript_source": "/Users/taghimolavi/Downloads/git/scholar-provenance/examples/iranian-enterprise-ai-bridge/paper/manuscript.md",
+  "title": {
+    "native": "From ERP Data to AI-Ready Enterprise Intelligence: An Open Architecture for Connecting Legacy ERP Systems to Large Language Models",
+    "english": "From ERP Data to AI-Ready Enterprise Intelligence: An Open Architecture for Connecting Legacy ERP Systems to Large Language Models",
+    "bilingual": "From ERP Data to AI-Ready Enterprise Intelligence: An Open Architecture for Connecting Legacy ERP Systems to Large Language Models",
+    "is_rtl": false
+  },
+  "abstract": {
+    "native": "Enterprises operating across emerging markets maintain mission-critical financial, inventory, and human capital records inside monolithic relational ERP databases. While large language models (LLMs) present opportunities for automated reporting and executive query resolution, direct database access introduces severe security vulnerabilities, data leakage hazards, and SQL dialect hallucinations. In this paper, we present the architecture of the Iranian Enterprise AI Bridge (IEAB), an open-source mediator framework designed to decouple legacy enterprise databases from modern generative AI agents. We specify the three-tier mediation pipeline, formalize schema sanitization invariants, and provide open-source reference implementations for leading enterprise database systems.",
+    "english": "Enterprises operating across emerging markets maintain mission-critical financial, inventory, and human capital records inside monolithic relational ERP databases. While large language models (LLMs) present opportunities for automated reporting and executive query resolution, direct database access introduces severe security vulnerabilities, data leakage hazards, and SQL dialect hallucinations. In this paper, we present the architecture of the Iranian Enterprise AI Bridge (IEAB), an open-source mediator framework designed to decouple legacy enterprise databases from modern generative AI agents. We specify the three-tier mediation pipeline, formalize schema sanitization invariants, and provide open-source reference implementations for leading enterprise database systems.",
+    "bilingual": "Enterprises operating across emerging markets maintain mission-critical financial, inventory, and human capital records inside monolithic relational ERP databases. While large language models (LLMs) present opportunities for automated reporting and executive query resolution, direct database access introduces severe security vulnerabilities, data leakage hazards, and SQL dialect hallucinations. In this paper, we present the architecture of the Iranian Enterprise AI Bridge (IEAB), an open-source mediator framework designed to decouple legacy enterprise databases from modern generative AI agents. We specify the three-tier mediation pipeline, formalize schema sanitization invariants, and provide open-source reference implementations for leading enterprise database systems.\n\n🔗 Author Website: https://molavi.pro | Code Repository: https://github.com/tmolavi/scholar-provenance"
+  },
+  "publication": {
+    "suggested_venue": "arXiv",
+    "year": 2026,
+    "doi_guidance": "Leave blank for initial Preprint upload (Zenodo automatically mints a permanent DOI upon GitHub Release)",
+    "status": "Preprint / Technical Report",
+    "license": "CC-BY-4.0"
+  },
+  "authors": [
+    {
+      "name": "Taghi Molavi",
+      "affiliation": "Independent Researcher",
+      "email": "info@molavi.pro",
+      "orcid": "",
+      "website": "https://molavi.pro",
+      "role": "Author"
+    }
+  ],
+  "research_interests_tags": {
+    "total_count": 20,
+    "comma_separated": "Artificial Intelligence, Systems Architecture, Benchmarking & Performance Evaluation, Data Privacy & Masking, Emerging Markets Technology, Large Language Models (LLMs), Distributed Systems, High-Throughput Systems, Information Security, Enterprise Digital Transformation, Generative AI, Enterprise Architecture, System Telemetry, Data Provenance, Legacy System Modernization, Natural Language Processing (NLP), Enterprise Resource Planning (ERP), Schema Sanitization, Financial Technology (FinTech), Retrieval-Augmented Generation (RAG)",
+    "tags_list": [
+      "Artificial Intelligence",
+      "Systems Architecture",
+      "Benchmarking & Performance Evaluation",
+      "Data Privacy & Masking",
+      "Emerging Markets Technology",
+      "Large Language Models (LLMs)",
+      "Distributed Systems",
+      "High-Throughput Systems",
+      "Information Security",
+      "Enterprise Digital Transformation",
+      "Generative AI",
+      "Enterprise Architecture",
+      "System Telemetry",
+      "Data Provenance",
+      "Legacy System Modernization",
+      "Natural Language Processing (NLP)",
+      "Enterprise Resource Planning (ERP)",
+      "Schema Sanitization",
+      "Financial Technology (FinTech)",
+      "Retrieval-Augmented Generation (RAG)"
+    ],
+    "categorized": {
+      "Core Domains & Disciplines": [
+        "Artificial Intelligence",
+        "Large Language Models (LLMs)",
+        "Generative AI",
+        "Data Provenance",
+        "Natural Language Processing (NLP)",
+        "Schema Sanitization",
+        "Financial Technology (FinTech)"
+      ],
+      "Methodologies & Evaluation": [
+        "Benchmarking & Performance Evaluation",
+        "Retrieval-Augmented Generation (RAG)"
+      ],
+      "Systems & Architectures": [
+        "Systems Architecture",
+        "Distributed Systems",
+        "High-Throughput Systems",
+        "Enterprise Digital Transformation",
+        "Enterprise Architecture",
+        "System Telemetry",
+        "Legacy System Modernization",
+        "Enterprise Resource Planning (ERP)"
+      ],
+      "Impact & Industrial Applications": [
+        "Data Privacy & Masking",
+        "Emerging Markets Technology",
+        "Information Security"
+      ]
+    }
+  },
+  "announcements": {
+    "feed_announcement": "🚀 Excited to share our latest research publication: \"From ERP Data to AI-Ready Enterprise Intelligence: An Open Architecture for Connecting Legacy ERP Systems to Large Language Models\"!\n\n📌 Key Highlights:\n• Rigorous, evidence-backed evaluation with cryptographic reproducibility.\n• Open-source architecture addressing critical system latency and integration invariants.\n• Comprehensive benchmark dataset and verifiable claims ledger included.\n\n📖 Read the full open-access manuscript and explore the reproducibility package:\nhttps://molavi.pro | https://github.com/tmolavi/scholar-provenance\n\n#Research #OpenScience #ArtificialIntelligence #SoftwareEngineering #Architecture #TechPreprint"
+  },
+  "discussion": {
+    "author_thoughts": "\"In developing From ERP Data to AI-Ready Enterprise Intelligence: An Open Architecture for Connecting Legacy ERP Systems to Large Language Models, our primary objective was to move beyond speculative demonstrations and establish an auditable, production-grade foundation. By anchoring every architectural claim in verifiable telemetry, we hope this provides practitioners and scholars with a genuinely reproducible blueprint.\"",
+    "discussion_prompt": "What are your thoughts on this architectural paradigm? How is your team addressing latency, data governance, and verification invariants in similar production environments? We welcome peer feedback and collaborative extensions!"
+  },
+  "links": {
+    "repository": "https://github.com/tmolavi/scholar-provenance",
+    "author_website": "https://molavi.pro"
+  }
+}

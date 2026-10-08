@@ -50,6 +50,6 @@ htmlcov/
 # Generated demo scratch / temp outputs
 *.tmp
 showcase-submission.json
-paper/
+/paper/
 .zenodo.json
 

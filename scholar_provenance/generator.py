@@ -114,7 +114,18 @@ def markdown_to_html_body(md_text: str, is_rtl: bool = False) -> str:
 
 
 def process_inline_markdown(text: str, is_rtl: bool = False) -> str:
-    """Format bold, italic, code, citations, and mixed LTR spans."""
+    """Format bold, italic, code, citations, links, and mixed LTR spans safely."""
+    # Preserve and extract markdown links before escaping
+    link_placeholders = []
+    def link_repl(match):
+        label = match.group(1)
+        url = match.group(2)
+        idx = len(link_placeholders)
+        link_placeholders.append((label, url))
+        return f"__LINK_PLACEHOLDER_{idx}__"
+
+    text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", link_repl, text)
+
     # Escape HTML special chars
     escaped = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
@@ -128,14 +139,26 @@ def process_inline_markdown(text: str, is_rtl: bool = False) -> str:
     # Citations: [@key]
     escaped = re.sub(r"\[@([a-zA-Z0-9_\-\:]+)\]", r'<cite class="citation-key">[\1]</cite>', escaped)
 
-    # Wrap English words / acronyms in LTR spans when in RTL context
-    if is_rtl:
-        # Match sequences of ASCII Latin words with punctuation (like DOI, URLs, technical terms)
-        def wrap_latin(match):
-            val = match.group(0)
-            return f'<span class="latin-inline">{val}</span>'
+    # Restore links
+    for idx, (label, url) in enumerate(link_placeholders):
+        safe_label = label.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        safe_url = url.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        escaped = escaped.replace(
+            f"__LINK_PLACEHOLDER_{idx}__",
+            f'<a href="{safe_url}" class="academic-link">{safe_label}</a>'
+        )
 
-        escaped = re.sub(r"\b[A-Za-z0-9_\-\:\/\.]{3,}\b", wrap_latin, escaped)
+    # Wrap English words / acronyms in LTR spans when in RTL context,
+    # strictly outside HTML tags and HTML entities so attributes and symbols are preserved.
+    if is_rtl:
+        tokens = re.split(r"(<[^>]+>|&[a-zA-Z0-9#]+;)", escaped)
+        for i in range(0, len(tokens), 2):
+            tokens[i] = re.sub(
+                r"\b[A-Za-z0-9_\-\:\/\.]{3,}\b",
+                lambda m: f'<span class="latin-inline">{m.group(0)}</span>',
+                tokens[i],
+            )
+        escaped = "".join(tokens)
 
     return escaped
 
@@ -415,6 +438,24 @@ def render_docx_manuscript(
             r.font.name = font_cfg.primary_font
             if is_rtl:
                 p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        elif stripped.startswith("![") and "](" in stripped and stripped.endswith(")"):
+            m = re.match(r"!\[(.*?)\]\((.*?)\)", stripped)
+            if m:
+                alt, src = m.groups()
+                img_path = (out_p.parent / src).resolve()
+                png_candidate = img_path.with_suffix(".png")
+                target_img = png_candidate if png_candidate.exists() else (img_path if img_path.exists() and img_path.suffix.lower() in [".png", ".jpg", ".jpeg"] else None)
+                if target_img:
+                    try:
+                        doc.add_picture(str(target_img), width=Inches(5.8))
+                    except Exception:
+                        pass
+                cap_p = doc.add_paragraph()
+                cap_r = cap_p.add_run(alt)
+                cap_r.font.name = font_cfg.primary_font
+                cap_r.font.size = Pt(9.0)
+                cap_r.italic = True
+                cap_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
         else:
             p = doc.add_paragraph()
             r = p.add_run(stripped)

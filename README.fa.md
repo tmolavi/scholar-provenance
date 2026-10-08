@@ -95,6 +95,13 @@
 - **LaTeX و BibTeX:** فایل‌های استاندارد برای ارسال به کنفرانس‌ها و مجلات.
 - **نمودارهای برداری SVG:** نمودارهای ستونی و دیاگرام‌های معماری با وضوح بالا و بدون وابستگی جانبی.
 
+### ۵. کیت خودکار انتشار و متادیتای پلتفرم‌های علمی (Academic Distribution Kit)
+رفع کامل دغدغه آپلود دستی در Academia.edu، ResearchGate، SSRN و arXiv. با هر بار اجرای `scholar-provenance build` یا `scholar-provenance publish-kit`، دو فایل `paper/publication-kit.md` و نسخه ماشینی `paper/publication-metadata.json` تولید می‌شود:
+- **فیلدهای آماده کپی-پیست:** عنوان بومی فارسی (با حل کامل مشکل حروف BiDi)، عنوان انگلیسی، عنوان ترکیبی دوزبانه، و چکیده یکپارچه با لینک‌های مخزن و وب‌سایت.
+- **۲۰ تگ دانشگاهی استاندارد انگلیسی (Top 20 Tags):** استخراج هوشمند و دسته‌بندی‌شده در ۴ حوزه تخصصی جهت دیده‌شدن حداکثری در نتایج جستجو و فید پلتفرم‌ها.
+- **مشخصات نشریه و راهنمای DOI:** پیشنهاد عنوان نشریه (مانند گزارش فنی و مشخصات معماری)، سال انتشار و راهنمای پرکردن DOI برای نسخه‌های پیش‌چاپ (Preprint).
+- **پست آماده فید و یادداشت مؤلف:** متن حرفه‌ای دوزبانه برای بخش Introduce Your Research فید آکادمیا و لینکدین، به همراه دیدگاه مهندسی و پرسش‌های آغاز گفتگو با سایر پژوهشگران.
+
 ---
 
 ## نصب و راه‌اندازی
@@ -194,6 +201,36 @@ publication_preferences:
 
 ---
 
+## دستورات خط فرمان (CLI Reference)
+
+```bash
+# ایجاد و مقداردهی اولیه فضای پژوهش
+scholar-provenance init my-research --title "Enterprise AI" --author "نام شما" --lang fa
+
+# مصاحبه گام‌به‌گام و ثبت بریف پژوهش
+scholar-provenance intake
+
+# جستجوی منابع علمی معتبر بدون نیاز به کلید API
+scholar-provenance search "enterprise LLM ERP integration" --limit 5
+
+# حسابرسی ادعاها و راستی‌آزمایی ارجاعات
+scholar-provenance audit paper/manuscript.md --matrix research/evidence-matrix.json
+
+# ساخت خروجی‌های مقاله (HTML, PDF, DOCX) و تولید خودکار publication-kit.md
+scholar-provenance build paper/manuscript.md
+
+# ساخت مستقل کیت انتشار برای Academia.edu و ResearchGate
+scholar-provenance publish-kit paper/manuscript.md --preview
+
+# بررسی ۱۲ گیت کنترل کیفیت و ارزیابی آمادگی انتشار
+scholar-provenance check-gates .
+
+# بسته‌بندی خودکار و اتصال به مخازن (arXiv, Overleaf, Zenodo, GitHub Releases)
+scholar-provenance publish --target all
+```
+
+---
+
 ## چرا این پروژه ایجاد شد؟
 
 این پروژه حاصل تجارب عملی در توسعه سیستم‌های هوش مصنوعی، اجرای آزمایش‌های تجربی، ارزیابی بنچ‌مارک‌ها و مواجهه مداوم با دشواریِ تبدیل کارهای فنی به مقالات دانشگاهی دقیق و قابل استناد است.
@@ -227,7 +264,7 @@ publication_preferences:
   title        = {{ScholarProvenance: Academic Evidence, Literature Verification \& Paper Generation Skill}},
   year         = {2026},
   publisher    = {GitHub},
-  version      = {0.2.0},
+  version      = {0.4.0},
   url          = {https://github.com/tmolavi/scholar-provenance}
 }
 ```

@@ -97,6 +97,13 @@ From a single canonical manuscript, compile:
 - **LaTeX & BibTeX:** Formatted `.tex` manuscript and `.bib` bibliography.
 - **Pure-SVG Vector Visuals:** Zero-dependency academic bar charts, line plots, and architecture schematics.
 
+### 5. Academic Distribution Kit (Ready-to-Upload Metadata for Academia.edu & ResearchGate)
+Eliminate the friction of self-archiving across scholarly platforms. When you run `scholar-provenance build` or `scholar-provenance publish-kit`, the engine automatically outputs `paper/publication-kit.md` and `paper/publication-metadata.json`:
+- **Ready-to-Copy Fields:** BiDi-safe native titles, English titles, bilingual titles, and integrated abstracts linking to code repositories and author profiles.
+- **Top 20 Academic Taxonomy Tags:** Curated, ranked English keywords categorized into disciplines (Core Domains, Methodologies, Architectures, Impact) for maximum search indexation and platform reach.
+- **Publication Details & Preprint Guidance:** Venue suggestions (e.g. *Technical Report & Architecture Specification*), publication year, and explicit DOI guidance.
+- **Social Announcement & Discussion Prompts:** Pre-drafted bilingual feeds ("Introduce Your Research") for Academia.edu and LinkedIn, along with author engineering philosophy and peer discussion starters.
+
 ---
 
 ## Installation
@@ -216,8 +223,11 @@ scholar-provenance audit paper/manuscript.md --matrix research/evidence-matrix.j
 # Generate vector SVG academic chart
 scholar-provenance chart --type bar --categories "Baseline,Optimized" --series '{"Latency (ms)": [240.5, 42.1]}'
 
-# Compile publication formats (HTML, PDF, DOCX)
+# Compile publication formats (HTML, PDF, DOCX, and publication-kit.md)
 scholar-provenance build paper/manuscript.md
+
+# Generate or update academic distribution kit on-demand
+scholar-provenance publish-kit paper/manuscript.md --preview
 
 # Scan for secrets, API tokens, and PII before release
 scholar-provenance scan-sensitive .

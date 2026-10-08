@@ -285,6 +285,13 @@ pre {{
   text-align: left;
 }}
 
+pre code {{
+  background-color: transparent !important;
+  color: #f8fafc !important;
+  padding: 0 !important;
+  border-radius: 0;
+}}
+
 /* Tables */
 table {{
   width: 100%;
