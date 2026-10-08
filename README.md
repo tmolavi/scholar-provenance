@@ -117,6 +117,70 @@ pip install -e ".[dev]"
 
 ---
 
+## Getting Started — Research Intake
+
+Before writing or drafting a single paragraph, ScholarProvenance enforces a **Mandatory Research Intake Interview** to ensure all claims are grounded in your empirical truth.
+
+### Example Intake Conversation
+
+```text
+🤖 ScholarProvenance:
+"Welcome to ScholarProvenance. Before drafting or researching, I need to understand your research context, empirical evidence, and publication goals through a short onboarding interview.
+
+What is the primary author's full name and affiliation?"
+
+👤 Author:
+"Taghi Molavi, Independent Researcher (email: info@molavi.pro)"
+
+🤖 ScholarProvenance:
+"What specific question or problem does this research address, and what primary datasets, benchmark logs, or code repositories should it be grounded on?"
+
+👤 Author:
+"We evaluate deterministic metric reconciliation between Iranian ERPs and on-prem LLMs using the 100-question CEO benchmark in inputs/benchmark_results.csv."
+
+🤖 ScholarProvenance:
+"Should I independently research and verify additional recent scholarly sources to complement your materials?
+[1] Yes - Broaden with credible external academic literature
+[2] Yes - But stay strictly within my specific research scope (Recommended)
+[3] No - Ground exclusively on the materials I provided"
+
+👤 Author:
+"Option 2 — stay strictly within my specific research scope."
+
+🤖 ScholarProvenance:
+"✅ Generating your Research Brief (research-brief.yaml).
+Please review the brief summary below. Do you approve this brief to begin research and drafting?"
+```
+
+### Sample Research Brief (`research-brief.yaml`)
+
+```yaml
+approved: true
+approval_date: "2026-10-08T10:00:00Z"
+approved_by: "Taghi Molavi"
+
+author_profile:
+  name: "Taghi Molavi"
+  affiliation: "Independent Researcher"
+  email: "info@molavi.pro"
+
+topic: "Enterprise AI Systems & ERP Integration"
+title: "Deterministic Metric Calculations for Executive AI Agents"
+research_question: "How can enterprise ERP data connect to LLMs without numeric hallucination?"
+original_contribution: "Dual-layer subledger reconciliation ledger with zero citation fabrication"
+research_type: "empirical"
+sources:
+  - url_or_path: "inputs/benchmark_results.csv"
+    source_type: "dataset"
+    is_primary_evidence: true
+external_research_permission: "scope_only"
+publication_preferences:
+  target_venue: "arXiv"
+  citation_style: "ieee"
+```
+
+---
+
 ## One-Prompt Experience
 
 Once installed in your agent environment, you can initiate a complete research project with a single instruction:

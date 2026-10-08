@@ -1,0 +1,49 @@
+approved: true
+approval_date: "2026-10-07T12:00:00Z"
+approved_by: "Taghi Molavi"
+
+author_profile:
+  name: "Taghi Molavi"
+  english_name: "Taghi Molavi"
+  affiliation: "Independent Researcher"
+  email: "info@molavi.pro"
+  orcid: "0009-0000-0000-0000"
+  website: "https://molavi.pro"
+  corresponding: true
+  coauthors: []
+
+topic: "Minimal Empirical Benchmark Evaluation"
+title: "Empirical Evaluation of Minimal Distributed Benchmarks"
+research_question: "What is the baseline latency distribution across minimal synthetic benchmarks?"
+original_contribution: "Reproducible baseline measurements with cryptographic evidence ledger"
+research_type: "empirical"
+target_audience: "Systems Engineers"
+language: "en"
+english_abstract_required: true
+
+sources:
+  - url_or_path: "inputs/benchmark_results.csv"
+    source_type: "dataset"
+    is_primary_evidence: true
+    description: "Benchmark latency observations"
+    verified: true
+
+external_research_permission: "scope_only"
+
+publication_preferences:
+  target_venue: "arXiv"
+  publication_mode: "preprint"
+  doi_required: true
+  citation_style: "ieee"
+  language: "en"
+
+integrity:
+  experiments_completed: true
+  datasets_available: true
+  benchmarks_reproducible: true
+  confidentiality_restrictions: false
+  ai_assistance_used: true
+
+evidence_gaps: []
+scientific_limitations:
+  - "Limited to synthetic test environments."

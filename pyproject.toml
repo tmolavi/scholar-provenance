@@ -4,8 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "scholar-provenance"
-version = "0.2.0"
+version = "0.3.0"
 description = "Turn empirical repositories, datasets, and technical documentation into verifiable academic research papers with strict evidence ledgers and zero citation fabrication."
+
 
 readme = "README.md"
 authors = [

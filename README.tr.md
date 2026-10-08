@@ -98,6 +98,39 @@ pip install -e ".[dev]"
 
 ---
 
+## Başlarken — Zorunlu Ön Araştırma Mülakatı (Research Intake)
+
+Herhangi bir metin taslağı oluşturulmadan önce, ScholarProvenance ampirik kanıtları ve yayın hedeflerini belirlemek üzere **Zorunlu Araştırma Mülakatı** yürütür:
+
+### Örnek Araştırma Özeti (`research-brief.yaml`)
+
+```yaml
+approved: true
+approval_date: "2026-10-08T10:00:00Z"
+approved_by: "Taghi Molavi"
+
+author_profile:
+  name: "Taghi Molavi"
+  affiliation: "Independent Researcher"
+  email: "info@molavi.pro"
+
+topic: "Kurumsal Yapay Zeka Sistemleri ve ERP Entegrasyonu"
+title: "Deterministic Metric Calculations for Executive AI Agents"
+research_question: "ERP verileri halüsinasyon olmadan yerel LLM'lere nasıl bağlanır?"
+original_contribution: "Çift katmanlı kanıt defteri ile sıfır uydurma kaynakça mimarisi"
+research_type: "empirical"
+sources:
+  - url_or_path: "inputs/benchmark_results.csv"
+    source_type: "dataset"
+    is_primary_evidence: true
+external_research_permission: "scope_only"
+publication_preferences:
+  target_venue: "arXiv"
+  citation_style: "ieee"
+```
+
+---
+
 ## Tek Komut Deneyimi
 
 Ajan ortamınızda tek bir istemle araştırmayı başlatabilirsiniz:

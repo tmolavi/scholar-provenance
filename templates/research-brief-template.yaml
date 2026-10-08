@@ -1,0 +1,56 @@
+# ScholarProvenance Research Brief Template
+# Generated during mandatory onboarding intake
+approved: true
+approval_date: "2026-10-08T12:00:00Z"
+approved_by: "Primary Author"
+
+author_profile:
+  name: "Taghi Molavi"
+  english_name: "Taghi Molavi"
+  affiliation: "Independent Researcher"
+  email: "info@molavi.pro"
+  orcid: "0009-0000-0000-0000"
+  website: "https://molavi.pro"
+  corresponding: true
+  coauthors: []
+
+topic: "AI Search & Empirical GEO Benchmarking"
+title: "Empirical Evaluation of Generative Engine Optimization"
+research_question: "How do generative AI engines rank and extract entity claims across web surfaces?"
+original_contribution: "Multi-layered diagnostic benchmark with zero-hallucination provenance ledgers"
+research_type: "empirical"
+target_audience: "AI Systems Engineers and Information Retrieval Researchers"
+language: "en"
+english_abstract_required: true
+
+sources:
+  - url_or_path: "benchmarks/results.csv"
+    source_type: "dataset"
+    is_primary_evidence: true
+    description: "Raw empirical latency and extraction measurements"
+    verified: true
+  - url_or_path: "README.md"
+    source_type: "documentation"
+    is_primary_evidence: false
+    description: "System overview"
+    verified: true
+
+external_research_permission: "scope_only"
+
+publication_preferences:
+  target_venue: "arXiv / ACM The Web Conference"
+  publication_mode: "preprint"
+  doi_required: true
+  citation_style: "ieee"
+  language: "en"
+
+integrity:
+  experiments_completed: true
+  datasets_available: true
+  benchmarks_reproducible: true
+  confidentiality_restrictions: false
+  ai_assistance_used: true
+
+evidence_gaps: []
+scientific_limitations:
+  - "Empirical evaluations are bounded by the observed LLM engine completion snapshots."

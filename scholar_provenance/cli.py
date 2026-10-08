@@ -22,6 +22,15 @@ from scholar_provenance.reproducibility import generate_reproducibility_package
 from scholar_provenance.visuals import generate_bar_chart_svg, generate_architecture_diagram_svg, VisualAsset, VisualManifestManager
 from scholar_provenance.generator import render_full_html_document, render_pdf_from_html, render_docx_manuscript
 from scholar_provenance.publisher import get_publication_recommendations, publish_release
+from scholar_provenance.intake import (
+    run_interactive_intake,
+    check_intake_approval,
+    approve_research_brief,
+    load_author_profile,
+    delete_author_profile,
+    save_author_profile,
+    AuthorProfile,
+)
 
 
 def cmd_init(args: argparse.Namespace) -> int:
@@ -475,6 +484,70 @@ def cmd_publish(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_intake(args: argparse.Namespace) -> int:
+    """Execute mandatory onboarding intake, profile management, or brief approval."""
+    target_dir = Path(args.path or ".").resolve()
+
+    if args.status:
+        approved, explanation = check_intake_approval(target_dir)
+        sym = "✅" if approved else "⚠️"
+        print(f"{sym} Intake Status for '{target_dir.name}': {explanation}")
+        return 0 if approved else 1
+
+    if args.approve:
+        ok = approve_research_brief(target_dir, approved_by=args.author)
+        if ok:
+            print(f"✅ Research Brief in '{target_dir.name}' marked as APPROVED.")
+            return 0
+        else:
+            print(f"❌ Failed to approve research-brief.yaml in '{target_dir}'. File not found or invalid.", file=sys.stderr)
+            return 1
+
+    if args.show_profile:
+        profile = load_author_profile()
+        if profile:
+            print(json.dumps(profile.to_dict(), indent=2, ensure_ascii=False))
+            return 0
+        else:
+            print("No saved author profile found.")
+            return 0
+
+    if args.clear_profile:
+        ok = delete_author_profile()
+        if ok:
+            print("✅ Author profile deleted successfully.")
+        else:
+            print("No author profile to delete.")
+        return 0
+
+    # Run intake session
+    custom_inputs = {}
+    if args.author:
+        custom_inputs["author"] = args.author
+    if args.title:
+        custom_inputs["title"] = args.title
+    if args.sources:
+        custom_inputs["sources"] = args.sources
+    if args.venue:
+        custom_inputs["venue"] = args.venue
+    if args.permission:
+        custom_inputs["permission"] = args.permission
+
+    brief, yaml_p, md_p = run_interactive_intake(
+        workspace_dir=target_dir,
+        lang=args.lang,
+        non_interactive=args.non_interactive,
+        auto_approve=args.auto_approve,
+        custom_inputs=custom_inputs,
+    )
+
+    print(f"\n✅ Research Brief saved to:")
+    print(f"   • {yaml_p}")
+    print(f"   • {md_p}")
+    print(f"   Approval Status: {'APPROVED' if brief.approved else 'PENDING AUTHOR APPROVAL'}")
+    return 0
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     parser = argparse.ArgumentParser(
         prog="scholar-provenance",
@@ -571,6 +644,22 @@ def main(argv: Optional[List[str]] = None) -> int:
     p_pub.add_argument("--dry-run", action="store_true", help="Simulate release generation without pushing to remotes")
     p_pub.add_argument("--recommend", action="store_true", help="Display proactive venue & archive recommendations")
 
+    # intake
+    p_intake = subparsers.add_parser("intake", help="Mandatory research intake & interactive onboarding")
+    p_intake.add_argument("path", nargs="?", default=".", help="Project workspace directory")
+    p_intake.add_argument("--lang", default="en", help="Interview language (en, fa, tr, az, ar)")
+    p_intake.add_argument("--status", action="store_true", help="Check if Research Brief is approved")
+    p_intake.add_argument("--approve", action="store_true", help="Approve existing Research Brief")
+    p_intake.add_argument("--show-profile", action="store_true", help="Display stored author profile")
+    p_intake.add_argument("--clear-profile", action="store_true", help="Delete stored author profile")
+    p_intake.add_argument("--non-interactive", action="store_true", help="Synthesize brief without interactive prompts")
+    p_intake.add_argument("--auto-approve", action="store_true", help="Automatically approve synthesized brief")
+    p_intake.add_argument("--author", help="Primary author name")
+    p_intake.add_argument("--title", help="Research title")
+    p_intake.add_argument("--sources", help="Comma-separated evidence sources")
+    p_intake.add_argument("--venue", help="Target venue")
+    p_intake.add_argument("--permission", choices=["expand", "scope_only", "none"], default="scope_only", help="External research permission")
+
     args = parser.parse_args(argv)
     if not args.command:
         parser.print_help()
@@ -590,6 +679,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "chart": cmd_chart,
         "showcase": cmd_showcase,
         "publish": cmd_publish,
+        "intake": cmd_intake,
     }
 
     return commands[args.command](args)

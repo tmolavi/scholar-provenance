@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ScholarProvenance Research Brief Schema",
+  "description": "Schema for confirmed, auditable Research Briefs generated during mandatory onboarding.",
+  "type": "object",
+  "required": [
+    "approved",
+    "author_profile",
+    "title",
+    "research_question",
+    "original_contribution",
+    "research_type",
+    "sources",
+    "external_research_permission"
+  ],
+  "properties": {
+    "approved": {
+      "type": "boolean",
+      "description": "Explicit approval status given by author."
+    },
+    "approval_date": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "approved_by": {
+      "type": ["string", "null"]
+    },
+    "author_profile": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "english_name": { "type": ["string", "null"] },
+        "affiliation": { "type": "string" },
+        "email": { "type": ["string", "null"] },
+        "orcid": { "type": ["string", "null"] },
+        "website": { "type": ["string", "null"] },
+        "bio": { "type": ["string", "null"] },
+        "corresponding": { "type": "boolean" },
+        "coauthors": { "type": "array" }
+      }
+    },
+    "topic": { "type": "string" },
+    "title": { "type": "string" },
+    "research_question": { "type": "string" },
+    "original_contribution": { "type": "string" },
+    "research_type": {
+      "type": "string",
+      "enum": ["empirical", "architecture", "literature_review", "case_study", "technical_report", "methodology"]
+    },
+    "target_audience": { "type": "string" },
+    "language": { "type": "string" },
+    "english_abstract_required": { "type": "boolean" },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["url_or_path"],
+        "properties": {
+          "url_or_path": { "type": "string" },
+          "source_type": { "type": "string" },
+          "is_primary_evidence": { "type": "boolean" },
+          "description": { "type": "string" },
+          "verified": { "type": "boolean" }
+        }
+      }
+    },
+    "external_research_permission": {
+      "type": "string",
+      "enum": ["expand", "scope_only", "none"]
+    },
+    "publication_preferences": {
+      "type": "object",
+      "properties": {
+        "target_venue": { "type": "string" },
+        "publication_mode": { "type": "string" },
+        "doi_required": { "type": "boolean" },
+        "citation_style": { "type": "string" },
+        "language": { "type": "string" }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "properties": {
+        "experiments_completed": { "type": "boolean" },
+        "datasets_available": { "type": "boolean" },
+        "benchmarks_reproducible": { "type": "boolean" },
+        "confidentiality_restrictions": { "type": "boolean" },
+        "ai_assistance_used": { "type": "boolean" }
+      }
+    },
+    "evidence_gaps": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "scientific_limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

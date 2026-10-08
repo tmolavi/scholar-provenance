@@ -49,13 +49,33 @@ def evaluate_project_gates(project_dir: str | Path) -> Tuple[bool, List[GateResu
         ))
     else:
         v_ok, v_errs = validate_file(manifest_path, "research-project.schema.json")
-        if v_ok:
+        brief_candidates = [root / "research-brief.yaml", root / "research-brief.yml"]
+        brief_file = next((b for b in brief_candidates if b.exists()), None)
+        brief_unapproved = False
+        if brief_file:
+            try:
+                b_data = yaml.safe_load(brief_file.read_text(encoding="utf-8")) or {}
+                if b_data.get("approved") is False:
+                    brief_unapproved = True
+            except Exception:
+                pass
+
+        if brief_unapproved:
+            results.append(GateResult(
+                gate_id="G1",
+                title="Inputs Ingestion & Research Brief",
+                passed=False,
+                status_label="FAILED",
+                details="Research Brief is pending author approval. Manuscript drafting cannot proceed without explicit author confirmation.",
+                remediation="Review research-brief.yaml and run `scholar-provenance intake --approve` or complete the onboarding interview.",
+            ))
+        elif v_ok:
             results.append(GateResult(
                 gate_id="G1",
                 title="Inputs Ingestion & Manifest",
                 passed=True,
                 status_label="PASSED",
-                details="Manifest validated successfully against research-project.schema.json.",
+                details="Manifest validated successfully against research-project.schema.json." + (" Approved Research Brief verified." if brief_file else ""),
             ))
         else:
             results.append(GateResult(

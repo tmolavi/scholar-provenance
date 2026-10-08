@@ -93,6 +93,12 @@ pip install git+https://github.com/tmolavi/scholar-provenance.git
 
 ---
 
+## البدء — المقابلة الإلزامية وتحديد خطة البحث (Research Intake)
+
+قبل الشروع في كتابة أي فقرة، يُجري نظام ScholarProvenance **مقابلة تأهيلية إلزامية** لجمع هوية الباحث، وفحص الأدلة التجريبية، وضمان عدم تلفيق أي استشهادات. ولا تبدأ مرحلة المسودة إلا بعد موافقة الباحث الصريحة على **ملخص خطة البحث (`research-brief.yaml`)**.
+
+---
+
 ## تجربة الأمر الواحد (One-Prompt Experience)
 
 ```markdown

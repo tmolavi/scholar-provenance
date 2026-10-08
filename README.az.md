@@ -79,6 +79,10 @@ Mərhələ 12: Məxfilik Yoxlanışı və 12 Keyfiyyət Qapısının Təsdiqi
 pip install git+https://github.com/tmolavi/scholar-provenance.git
 ```
 
+## Başlanğıc — Məcburi İlkin Sorğu (Research Intake)
+
+Məqalənin yazılışına başlamazdan əvvəl, ScholarProvenance tədqiqatın əsas sübutlarını və nəşr hədəflərini müəyyənləşdirmək üçün **İlkin Mülakat** aparır və tədqiqat planı (`research-brief.yaml`) təsdiq edilmədən qaralama mərhələsinə keçmir.
+
 ---
 
 ## Tək Sorğu Təcrübəsi

@@ -3,8 +3,8 @@ name: scholar-provenance
 description: "Turn technical repositories, benchmark datasets, experiments, architecture docs, and notes into verifiable, peer-review-defensible academic research papers with strict evidence ledgers, zero citation fabrication, autonomous multi-target publishing, and multi-language support."
 category: research
 tags: [academic-paper, research-agent, citation-verification, evidence-matrix, peer-review, reproducibility, auto-publish, multilingual]
-version: "0.2.0"
-date_created: "2026-10-07"
+version: "0.3.0"
+date_created: "2026-10-08"
 ---
 
 # ScholarProvenance: Academic Research & Paper Skill
@@ -31,10 +31,73 @@ Activate this skill whenever the user asks to:
 
 ---
 
-## 2. The 16-Stage Pipeline
+## 2. Mandatory Pre-Flight Gate: Research Intake & Interactive Onboarding (Stage 00)
+
+> [!IMPORTANT]
+> **MANDATORY INTAKE RULE:**  
+> Whenever a user invokes ScholarProvenance to write, draft, or formalize an academic paper, the agent **MUST NOT** immediately begin drafting sections or hallucinating background context.  
+> It must first initiate an interactive onboarding interview to capture the empirical ground truth, author identity, research boundaries, and publication goals.  
+> Drafting cannot begin until a structured **Research Brief (`research-brief.yaml`)** has been presented and explicitly approved by the human author.
+
+### 2.1. The 7 Progressive Intake Stages
+
+1. **Stage A — Author Identity:**
+   - Full human name (native script and English transliteration).
+   - Real institutional affiliation or explicit "Independent Researcher" status. (Never invent degrees or university affiliations).
+   - Contact email, optional ORCID, Google Scholar, or personal website.
+   - Corresponding author designation and coauthor contributions if applicable.
+   - *Memory Reuse:* Remember author details locally (`author-profile.json` or `~/.scholar-provenance/author-profile.json`) with user consent.
+
+2. **Stage B — Research Definition:**
+   - Research topic and intended title (suggest academic alternatives if user is uncertain).
+   - Core research question (RQ) or specific engineering problem solved.
+   - Original novelty/contribution statement.
+   - Research type: Empirical Study, System Architecture, Literature Review, Case Study, Technical Report, or Methodology.
+   - Target audience and intended publication language (with English abstract if non-English).
+
+3. **Stage C — Evidence & Research Materials:**
+   - Request source materials: PDF, DOCX, Markdown, CSV datasets, test logs, code repositories, benchmark JSONs, or URLs.
+   - Distinguish mandatory primary evidence (strict provenance required) from optional background docs.
+   - *Hard Rule:* Never treat a GitHub README as proof that its claimed experiments actually occurred.
+
+4. **Stage D — External Research Permission:**
+   - Ask user: *"Should I independently research and verify additional recent scholarly sources to complement your materials?"*
+   - Options:
+     * `[1] Expand`: Research and expand using credible external scholarly sources.
+     * `[2] Scope Only (Default)`: Stay strictly within the user's defined research scope.
+     * `[3] None`: Use exclusively the materials provided by the user.
+
+5. **Stage E — Publication Goals:**
+   - Target venue: arXiv, specific IEEE/ACM journal, premier conference (NeurIPS, ICML, WWW), or offer recommendations.
+   - Persistent DOI required? (e.g. Zenodo / Open Science).
+   - Budget constraints (e.g. Diamond Open Access vs APC journals).
+
+6. **Stage F — Manuscript Preferences:**
+   - Style: IEEE, ACM, APA, Nature, or venue specific.
+   - Output formats: PDF (via WeasyPrint), HTML (semantic ScholarlyArticle), DOCX, LaTeX, Markdown.
+   - Language typography and font stack (e.g. Vazirmatn for Persian/Arabic, standard serif for Latin).
+
+7. **Stage G — Research Integrity & Ethical Clearance:**
+   - Experimental status: completed measurements vs proposed future work.
+   - Datasets available and benchmarks reproducible.
+   - Confidentiality restrictions, private tokens, or proprietary IP cleared.
+   - AI assistance disclosure statement generated in compliance with COPE (Committee on Publication Ethics).
+
+### 2.2. Intelligent Intake Execution
+
+- **Progressive Dialog:** Ask short, focused questions grouped into 2-3 logical steps, not an overwhelming wall of text.
+- **Auto-Extraction:** Scan existing repository files (`README.md`, `git config`, `.csv` datasets, `pyproject.toml`) and ask user only to confirm extracted items.
+- **Synthesize Research Brief:** Generate `research-brief.yaml` and `research-brief.md`.
+- **Author Approval Gate:** Show the brief summary to the user. Only proceed to Stage 01 when the user confirms (`approved: true`).
+
+---
+
+## 3. The 17-Stage Complete Pipeline
 
 ```
 [INPUT MATERIALS]
+       ↓
+Stage 00: Mandatory Research Intake & Approved Research Brief (Pre-Flight Gate)
        ↓
 Stage 01: Research Material Discovery & Ingestion
        ↓
@@ -42,7 +105,7 @@ Stage 02: Evidence Extraction & Taxonomy Tagging
        ↓
 Stage 03: Research Question & Scope Definition
        ↓
-Stage 04: External Literature Search (OpenAlex, Crossref, arXiv)
+Stage 04: External Literature Search (OpenAlex, Crossref, Semantic Scholar, arXiv)
        ↓
 Stage 05: Strict Source Verification (Zero-Fabrication Gate)
        ↓
@@ -71,7 +134,8 @@ Stage 16: Reproducibility, Publication Packaging & Autonomous Distribution
 
 ---
 
-## 3. Strict Research & Evidence Rules
+## 4. Strict Research & Evidence Rules
+
 
 ### 3.1. Zero Fabricated Citations (Hard Gate)
 1. **Never generate citations from parametric memory alone.**

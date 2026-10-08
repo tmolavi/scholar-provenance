@@ -5,6 +5,16 @@ All notable changes to **ScholarProvenance** will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-10-08
+
+### Added
+- **Mandatory Pre-Flight Research Intake:** Interactive onboarding engine (`scholar_provenance/intake.py`) enforcing a mandatory 7-stage interview (Author Identity, Research Definition, Evidence Materials, External Permissions, Publication Goals, Preferences, Research Integrity) before any drafting occurs.
+- **Structured Research Brief Gate:** Formal synthesis of `research-brief.yaml` and `research-brief.md`. Quality Gate G1 strictly blocks drafting if Research Brief is unapproved by author.
+- **Reusable Research Profiles:** Support for portable `author-profile.json` (local and `~/.scholar-provenance/author-profile.json`) with interactive reuse, editing, and deletion.
+- **Automated Workspace Context Extraction:** Proactive scanning of repositories, READMEs, git configs, test suites, and empirical datasets, prompting users only to confirm discovered evidence.
+- **Multilingual Onboarding Prompts:** Progressive interactive interview support in English, Persian (فارسی), Turkish (Türkçe), Azerbaijani (Azərbaycan dili), and Gulf Arabic (العربية).
+- **New CLI Subcommand:** `scholar-provenance intake` with interactive mode, `--status`, `--approve`, and profile management flags.
+
 ## [0.2.0] - 2026-10-07
 
 ### Added
